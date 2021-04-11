@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "cruncher",
+    "site": "cruncher-3",
     "public": "public",
     "ignore": [
       "firebase.json",
