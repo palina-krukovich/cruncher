@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "security.allowed-headers",
+      "type": "java.lang.String",
+      "description": "Description for security.allowed-headers."
+    },
+    {
+      "name": "security.allowed-methods",
+      "type": "java.lang.String",
+      "description": "Description for security.allowed-methods."
+    },
+    {
+      "name": "security.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Description for security.allowed-origins."
+    }
+  ] }

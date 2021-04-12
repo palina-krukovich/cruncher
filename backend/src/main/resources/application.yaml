@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: cruncher-api
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://34.68.102.175:5432/cruncher
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+security:
+  allowed-headers:
+    - Authorization
+    - Origin
+    - Content-Type
+    - Accept
+    - Accept-Encoding
+    - Accept-Language
+    - Access-Control-Allow-Origin
+    - Access-Control-Allow-Headers
+    - Access-Control-Request-Method
+    - X-Requested-With
+    - X-Auth-Token
+    - X-Xsrf-Token
+    - Cache-Control
+    - Id-Token
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-origins:
+    - https://cruncher-3.web.app
+    - https://cruncher-3.firebaseapp.com
+    - https://localhost:4200
