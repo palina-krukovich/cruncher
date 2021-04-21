@@ -1,4 +1,4 @@
-package com.pk.cruncher.security.model;
+package com.pk.cruncher.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,8 +1,7 @@
-package com.pk.cruncher.security;
+package com.pk.cruncher.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pk.cruncher.security.model.Authority;
-import com.pk.cruncher.security.model.SecurityProperties;
+import com.pk.cruncher.security.SecurityFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -40,13 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationEntryPoint getAuthenticationEntryPoint() {
         return (request, response, e) -> {
             Map<String, Object> errorObject = new HashMap<>();
-            int errorCode = 401;
-            errorObject.put("message", "Unauthorized access of protected resource, invalid credentials");
             errorObject.put("error", HttpStatus.UNAUTHORIZED);
-            errorObject.put("code", errorCode);
             errorObject.put("timestamp", OffsetDateTime.now());
             response.setContentType("application/json;charset=UTF-8");
-            response.setStatus(errorCode);
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write(objectMapper.writeValueAsString(errorObject));
         };
     }
@@ -68,9 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and().csrf().disable().formLogin().disable().httpBasic().disable()
             .exceptionHandling().authenticationEntryPoint(getAuthenticationEntryPoint())
             .and().authorizeRequests()
-            .antMatchers("/pos/**").hasAuthority(Authority.POS.toString())
-            .antMatchers("/kitchen/**").hasAuthority(Authority.KITCHEN.toString())
-            .antMatchers("/manage/**").hasAuthority(Authority.MANAGE.toString())
             .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated()
             .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

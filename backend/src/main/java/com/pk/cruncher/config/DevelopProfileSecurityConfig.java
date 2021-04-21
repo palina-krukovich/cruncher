@@ -1,4 +1,4 @@
-package com.pk.cruncher.security;
+package com.pk.cruncher.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
