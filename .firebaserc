@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "cruncher-3"
+  },
+  "targets": {
+    "cruncher-3": {
+      "hosting": {
+        "cruncher": [
+          "cruncher-3"
+        ]
+      }
+    }
   }
 }

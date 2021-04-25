@@ -1,27 +1,29 @@
 # Cruncher
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
+**Cruncher** is an *Automated Restaurant Management System*.
 
-## Development server
+### Technology Stack
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+| Component     | Technology |
+| ------------- | ---------- |
+| **Front-End** | <ul><li>TypeScript</li><li>Angular 10</li><li>Angular Material</li><li>ngx-translate</li></ul> |
+| **Back-End**  | <ul><li>Java 11</li><li>Spring Boot</li><li>Spring Security</li><li>Spring Data JPA</li></ul> |
+| **Database**  | PostgreSQL |
+| **GCP**       | <ul><li>App Engine</li><li>Cloud SQL</li></ul>
+| **Firebase**  | <ul><li>Authentication</li><li>Storage</li><li>Firestore</li><li>Hosting</li></ul>
 
-## Code scaffolding
+### Build & Run Front-End
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```shell
+# Install the dependencies.
+npm install
 
-## Build
+# Build the project. 
+# The build artifacts will be stored in the 'dist' directory
+ng build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Serve the application. 
+# Navigate to 'http://localhost:4200/'. 
+# The app will automatically reload if you change the source files.
+ng serve
+```
