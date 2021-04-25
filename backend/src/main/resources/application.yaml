@@ -13,7 +13,7 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
 security:
   allowed-headers:
     - Authorization
