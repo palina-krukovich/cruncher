@@ -13,7 +13,7 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 security:
   allowed-headers:
     - Authorization
@@ -41,3 +41,4 @@ security:
     - https://cruncher-3.web.app
     - https://cruncher-3.firebaseapp.com
     - https://localhost:4200
+    - http://localhost:4200

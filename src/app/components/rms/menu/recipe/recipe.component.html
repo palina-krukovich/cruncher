@@ -1,0 +1,17 @@
+<div class="p1" style="background: whitesmoke; border-radius: 10px" fxLayout="column" fxLayoutGap="15px">
+  <h2 class="p0 m0">Recipe</h2>
+  <div *ngFor="let recipeIngredient of recipeIngredients; let i = index">
+    <app-recipe-ingredient *ngIf="!!ingredients"
+                           [ingredients]="ingredients"
+                           [(recipeIngredient)]="recipeIngredients[i]"
+                           (recipeIngredientChange)="onChange()"
+                           (deleteClick)="onDeleteClick(recipeIngredients[i])"
+    ></app-recipe-ingredient>
+  </div>
+  <div fxLayout="row">
+    <button mat-stroked-button color="primary" (click)="add()">Add Ingredient</button>
+    <div fxFlex></div>
+    <span class="px1 mat-body-strong" fxFlexAlign="center">Total weight: {{totalWeight}}</span>
+    <span class="px1 mat-body-strong" fxFlexAlign="center">Total cost: {{totalCost}}</span>
+  </div>
+</div>

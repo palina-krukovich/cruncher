@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -24,8 +21,9 @@ public class Supply extends BaseEntity {
 
     private OffsetDateTime suppliedAt;
 
+    @Column(length = 4096)
     private String comment;
 
-    @OneToMany(mappedBy = "supply")
+    @OneToMany(mappedBy = "supply", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemSupply> itemSupplies;
 }

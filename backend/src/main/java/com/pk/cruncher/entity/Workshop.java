@@ -18,6 +18,8 @@ public class Workshop extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    private Boolean deleted;
+
     @OneToMany(mappedBy = "workshop")
-    private List<MenuItem> menuItems;
+    private List<Item> items;
 }

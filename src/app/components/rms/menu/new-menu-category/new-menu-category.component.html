@@ -1,0 +1,33 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Menu Category' : 'Edit Menu Category'"
+                [backEnabled]="true"
+                (backClick)="openCategoriesPage()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="10px" class="p1" style="max-width: 480px;">
+      <mat-form-field appearance="outline">
+        <mat-label>Category name</mat-label>
+        <input matInput [formControl]="name" placeholder="Ex. Pizza" autocomplete="off">
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Parent Category</mat-label>
+        <mat-select [formControl]="parentCategory">
+          <mat-option value="top-screen">Top Screen</mat-option>
+          <mat-option *ngFor="let category of flatCategories" [value]="category.id">
+            <span *ngFor="let l of getIterable(category.level)">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <app-image-select [(file)]="imgFile" [(initialImg)]="initialImg"></app-image-select>
+        <app-color-picker [(color)]="color"></app-color-picker>
+        <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveBtnDisabled()" (click)="onSaveClick()">Save</button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

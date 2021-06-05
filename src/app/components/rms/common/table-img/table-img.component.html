@@ -1,0 +1,5 @@
+<div class="table-img-container mat-elevation-z2" fxLayoutAlign="center">
+  <img *ngIf="displayPicture" [src]="photoURL" alt="" class="table-img">
+  <div *ngIf="displayColor" class="table-clr" [class]="color" fxLayout="column" fxLayoutAlign="center">{{abbr}}</div>
+  <div *ngIf="displayDefaultColor" class="table-clr default-color" fxLayout="column" fxLayoutAlign="center">{{abbr}}</div>
+</div>

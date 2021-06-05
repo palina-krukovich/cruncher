@@ -1,0 +1,49 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Write Offs"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                [columnsEnabled]="true"
+                (addClick)="onAddClick()"
+                [(columns)]="columns"
+    ></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let writeOff"> {{writeOff.writtenOffAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Product">
+        <th mat-header-cell *matHeaderCellDef> Product </th>
+        <td mat-cell *matCellDef="let writeOff"> {{writeOff.item.name}} ({{writeOff.item.itemType.toLowerCase()}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="Quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let writeOff"> {{writeOff.quantity }} {{writeOff.item.itemType === 'PRODUCT' ? 'pcs' : writeOff.item.unit.toLowerCase()}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let writeOff"> {{ writeOff.auto ? 'Automatic' : 'Manual' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Reason">
+        <th mat-header-cell *matHeaderCellDef> Reason </th>
+        <td mat-cell *matCellDef="let writeOff"> {{writeOff.writeOffReason ? writeOff.writeOffReason.name : '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let writeOff">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button color="primary" (click)="onEditClick(writeOff)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(writeOff)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

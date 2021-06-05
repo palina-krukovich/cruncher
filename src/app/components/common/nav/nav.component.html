@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <span>Cruncher</span>
+  <span fxFlex></span>
+  <ngx-auth-firebaseui-avatar [canDeleteAccount]="config.canDeleteAccount"
+                              (onSignOut)="config.onSignOut()"
+                              [links]="config.links"
+  ></ngx-auth-firebaseui-avatar>
+</mat-toolbar>

@@ -18,6 +18,7 @@ public class Position extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String title;
 
+    @Column(length = 4096)
     private String description;
 
     @OneToMany(mappedBy = "position")

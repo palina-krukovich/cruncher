@@ -1,0 +1,11 @@
+<div *ngIf="(filepath && filepath !== '') || initialImg" style="position: relative; width: fit-content">
+  <button mat-mini-fab style="position: absolute; top: -20px; right: -20px" (click)="removeImage()"><mat-icon>clear</mat-icon></button>
+  <img [src]="filepath || initialImg" style="max-width: 150px; max-height: 150px">
+</div>
+<label for="img-input">
+  <a mat-stroked-button color="primary">
+    <span style="margin-right: 10px">Upload image</span>
+    <mat-icon>cloud_upload</mat-icon>
+  </a>
+</label>
+<input id="img-input" type="file" accept="image/*" [formControl]="formControl" (change)="imagePreview($event)" class="display-none"/>

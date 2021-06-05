@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <table mat-table [dataSource]="data.trashItems" style="width: 100%">
+    <ng-container matColumnDef="img">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item">
+        <div class="table-img-container">
+          <img *ngIf="item.photoURL" [src]="item.photoURL" alt="" class="table-img">
+          <div *ngIf="!item.photoURL && item.color" class="table-clr" [class]="item.color" fxLayout="column" fxLayoutAlign="center">
+            {{abbr(item.name)}}
+          </div>
+          <div *ngIf="!item.photoURL && !item.color" class="table-clr default-color" fxLayout="column" fxLayoutAlign="center">
+            {{abbr(item.name)}}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="deletedAt">
+      <th mat-header-cell *matHeaderCellDef>Deleted at</th>
+      <td mat-cell *matCellDef="let item"> {{item.deletedAt | date:'EEE, d MMM y, h:mm'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-button color="primary" (click)="onRecoverClick(item)">Recover</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+</div>

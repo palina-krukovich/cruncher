@@ -1,0 +1,59 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="'Inventory Check for ' + inventoryDate"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <table mat-table [dataSource]="inventories" class="width-100">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.item.name}} ({{inventory.item.itemType.toLowerCase()}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="Last Inventory Check">
+        <th mat-header-cell *matHeaderCellDef> Last Inventory Check </th>
+        <td mat-cell *matCellDef="let inventory">
+          <span *ngIf="!!inventory.lastInventoryCheckDate">
+            {{inventory.lastInventoryCheckDate | date: 'EEE, d MMM y, h:mm'}}</span>
+          <span *ngIf="!inventory.lastInventoryCheckDate">-</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Initial Balance">
+        <th mat-header-cell *matHeaderCellDef> Initial Balance </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.initialQuantity}} {{getUnit(inventory)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Supplies">
+        <th mat-header-cell *matHeaderCellDef> Supplies </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.supplyQuantity}} {{getUnit(inventory)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Sales">
+        <th mat-header-cell *matHeaderCellDef> Sales </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.salesQuantity}} {{getUnit(inventory)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Waste">
+        <th mat-header-cell *matHeaderCellDef> Waste </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.wasteQuantity}} {{getUnit(inventory)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Expected Balance">
+        <th mat-header-cell *matHeaderCellDef> Expected Balance </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.expectedQuantity}} {{getUnit(inventory)}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Actual Balance">
+        <th mat-header-cell *matHeaderCellDef> Actual Balance </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.actualQuantity}} {{getUnit(inventory)}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Difference">
+        <th mat-header-cell *matHeaderCellDef> Difference </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.differenceQuantity}} {{getUnit(inventory)}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Difference, byn">
+        <th mat-header-cell *matHeaderCellDef> Difference, byn </th>
+        <td mat-cell *matCellDef="let inventory"> {{inventory.differenceValue / 100}} Br</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

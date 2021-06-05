@@ -1,0 +1,35 @@
+<div fxLayout="row" fxLayoutGap="25px">
+  <mat-form-field appearance="outline">
+    <mat-label>Modifier</mat-label>
+    <mat-select [formControl]="ingredientId">
+      <mat-option value="-">No extra ingredients</mat-option>
+      <mat-option *ngFor="let i of ingredients" [value]="i.id">
+        {{i.name}} ({{i.type.toLowerCase()}})
+      </mat-option>
+    </mat-select>
+    <mat-error>Please select modifier</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex>
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="name" autocomplete="off">
+    <mat-error>Name is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" *ngIf="ingredientId.value !== '-'" style="width: 100px">
+    <mat-label>Brutto</mat-label>
+    <input matInput [formControl]="quantity" autocomplete="off">
+    <span matSuffix *ngIf="modification.ingredient !== null">{{modification.ingredient.unit?.toLowerCase() || 'kg'}}</span>
+    <mat-error>Brutto is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 100px">
+    <mat-label>Price</mat-label>
+    <input matInput [formControl]="price" autocomplete="off">
+    <span matSuffix>Br</span>
+    <mat-error>Price is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 100px">
+    <mat-label>Cost</mat-label>
+    <input matInput [value]="cost" disabled autocomplete="off">
+    <span matSuffix>Br</span>
+  </mat-form-field>
+  <button mat-icon-button fxFlexAlign="center" (click)="onDeleteClick()"><mat-icon>close</mat-icon></button>
+</div>

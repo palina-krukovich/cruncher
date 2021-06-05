@@ -1,0 +1,72 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Product' : 'Edit Product'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="10px" class="p1" style="width: 480px">
+      <mat-form-field appearance="outline">
+        <mat-label>Product name</mat-label>
+        <input matInput [formControl]="name" placeholder="Ex. Gas Water" autocomplete="off">
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <mat-form-field appearance="outline">
+          <mat-label>Internal Code</mat-label>
+          <input matInput [formControl]="code" placeholder="Ex. GW_123" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Barcode</mat-label>
+          <input matInput [formControl]="barcode" placeholder="Ex. 1234567890123456" autocomplete="off">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [formControl]="category">
+            <mat-option value="-">Top Screen</mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              <span *ngFor="let l of getIterable(category.level)">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              {{category.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Workshop</mat-label>
+          <mat-select [formControl]="workshop">
+            <mat-option value="-">Without workshop</mat-option>
+            <mat-option *ngFor="let workshop of workshops" [value]="workshop.id">{{workshop.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="25px">
+        <mat-form-field appearance="outline">
+          <mat-label>Cost without VAT</mat-label>
+          <input matInput [formControl]="cost" (change)="setPriceValue();setMarkupValue()" autocomplete="off">
+          <span matSuffix>Br</span>
+        </mat-form-field>
+        <mat-icon fxFlexAlign="center">add</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Markup</mat-label>
+          <input matInput [formControl]="markup" (change)="setPriceValue()" autocomplete="off">
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <mat-icon fxFlexAlign="center">drag_handle</mat-icon>
+        <mat-form-field appearance="outline">
+          <mat-label>Total price</mat-label>
+          <input matInput [formControl]="price" (change)="setMarkupValue()" autocomplete="off">
+          <span matSuffix>Br</span>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <mat-checkbox [(ngModel)]="noDiscount">No Discount</mat-checkbox>
+        <app-image-select [(file)]="imgFile" [(initialImg)]="initialImg"></app-image-select>
+        <app-color-picker [(color)]="color"></app-color-picker>
+        <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

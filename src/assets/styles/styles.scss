@@ -1,4 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$primary: #673AB7;
+$primary_100: #EAD9FB;
+$primary_200: #D3B4F7;
+$primary_300: #B389E9;
+$primary_400: #9267D3;
+$primary_500: #673AB7;
+$primary_600: #4F2A9D;
+$primary_700: #3A1D83;
+$primary_800: #28126A;
+$primary_900: #1B0B57;
+
+$accent: #FFD740;
+$accent_100: #FFFAD8;
+$accent_200: #FFF3B2;
+$accent_300: #FFEB8C;
+$accent_400: #FFE46F;
+$accent_500: #FFD740;
+$accent_600: #DBB32E;
+$accent_700: #B79120;
+$accent_800: #937014;
+$accent_900: #7A590C;
+
+$warn: #f44336;
+
+.p0 { padding: 0; }
+.p1 { padding: 25px; }
+.p2 { padding: 50px; }
+.p3 { padding: 100px; }
+.p4 { padding: 150px; }
+.p5 { padding: 300px; }
+
+.px0 { padding-left: 0; padding-right: 0; }
+.px1 { padding-left: 25px; padding-right: 25px; }
+.px2 { padding-left: 50px; padding-right: 50px; }
+.px3 { padding-left: 100px; padding-right: 100px; }
+.px4 { padding-left: 150px; padding-right: 150px; }
+.px5 { padding-left: 300px; padding-right: 300px; }
+
+.py0 { padding-top: 0; padding-bottom: 0; }
+.py1 { padding-top: 25px; padding-bottom: 25px; }
+.py2 { padding-top: 50px; padding-bottom: 50px; }
+.py3 { padding-top: 100px; padding-bottom: 100px; }
+.py4 { padding-top: 150px; padding-bottom: 150px; }
+.py5 { padding-top: 300px; padding-bottom: 300px; }
+
+.m0 { margin: 0; }
+.m1 { margin: 25px; }
+.m2 { margin: 50px; }
+.m3 { margin: 100px; }
+.m4 { margin: 150px; }
+.m5 { margin: 300px; }
+
+.mx0 { margin-left: 0; margin-right: 0; }
+.mx1 { margin-left: 25px; margin-right: 25px; }
+.mx2 { margin-left: 50px; margin-right: 50px; }
+.mx3 { margin-left: 100px; margin-right: 100px; }
+.mx4 { margin-left: 150px; margin-right: 150px; }
+.mx5 { margin-left: 300px; margin-right: 300px; }
+
+.my0 { margin-top: 0; margin-bottom: 0; }
+.my1 { margin-top: 25px; margin-bottom: 25px; }
+.my2 { margin-top: 50px; margin-bottom: 50px; }
+.my3 { margin-top: 100px; margin-bottom: 100px; }
+.my4 { margin-top: 150px; margin-bottom: 150px; }
+.my5 { margin-top: 300px; margin-bottom: 300px; }
+
+.text-wrap { text-wrap: normal; }
+.rounded { border-radius: 8px; }
+.text-center { text-align: center }
+.cursor-hand { cursor: pointer }
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 230px;
+}
+
+.display-none {
+  display: none;
+}
+
+.pink { background: #EB96AA }
+.red { background: #C54B6C }
+.orange { background: #F27348 }
+.yellow { background: #F7CE76 }
+.green { background: #8DA47E }
+.mint { background: #A1CdCE }
+.blue { background: #81B1CC }
+.dark-blue { background: #4382BB }
+.purple { background: #A15D98 }
+.default-color { background: #7B92AA }
+
+
+.table-img-container {
+  width: 50px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table-clr {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: white;
+  font-size: 1.3em;
+  letter-spacing: 2px;
+}
+
+.table-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.tree-list ul,
+.tree-list li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.width-100 {
+  width: 100%;
+}

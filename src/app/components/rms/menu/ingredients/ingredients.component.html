@@ -1,0 +1,80 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Ingredients"
+                [columnsEnabled]="true"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                [trashEnabled]="true"
+                [(columns)]="columns"
+                (addClick)="onAddClick()"
+                (trashClick)="onTrashClick()"
+    ></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Picture">
+        <th mat-header-cell *matHeaderCellDef>Picture</th>
+        <td mat-cell *matCellDef="let ingredient">
+          <app-table-img [color]="ingredient.color" [photoURL]="ingredient.photoURL" [name]="ingredient.name"></app-table-img>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Code">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.code}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Barcode">
+        <th mat-header-cell *matHeaderCellDef> Barcode </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.barcode}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Unit">
+        <th mat-header-cell *matHeaderCellDef> Unit </th>
+        <td mat-cell *matCellDef="let ingredient">
+          {{ingredient.unit.toLowerCase()}}
+          <span *ngIf="ingredient.unit === 'PCS'">({{ingredient.weightPerPiece * 1000}} g)</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Losses">
+        <th mat-header-cell *matHeaderCellDef> Losses </th>
+        <td mat-cell *matCellDef="let ingredient">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <div>{{ingredient.lossClear}} %</div>
+            <div>{{ingredient.lossBoil}} %</div>
+            <div>{{ingredient.lossFry}} %</div>
+            <div>{{ingredient.lossStew}} %</div>
+            <div>{{ingredient.lossBake}} %</div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Cost">
+        <th mat-header-cell *matHeaderCellDef> Cost </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.cost / 100 | number : '1.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.createdAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Updated">
+        <th mat-header-cell *matHeaderCellDef> Updated </th>
+        <td mat-cell *matCellDef="let ingredient"> {{ingredient.updatedAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let ingredient">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button color="primary" (click)="onEditClick(ingredient)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(ingredient)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

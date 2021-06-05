@@ -26,14 +26,10 @@ public class ModificationGroup extends BaseEntity {
 
     private Boolean deleted;
 
-    @ManyToMany
-    @JoinTable(
-        name = "menu_item_modification_group",
-        joinColumns = @JoinColumn(name = "modification_group_id"),
-        inverseJoinColumns = @JoinColumn(name = "menu_item_id")
-    )
-    private List<MenuItem> menuItems;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
-    @OneToMany(mappedBy = "modificationGroup")
+    @OneToMany(mappedBy = "modificationGroup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Modification> modifications;
 }

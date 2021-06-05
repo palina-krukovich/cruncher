@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Add new modification group</h1>
+<div mat-dialog-content>
+  <div fxLayout="column" fxLayoutGap="15px" fxFlexOffset="12px" class="width-100">
+    <mat-form-field appearance="outline">
+      <mat-label>Modification group name</mat-label>
+      <input matInput [(ngModel)]="modificationGroup.name" placeholder="Ex. Extra ingredients" autofocus autocomplete="off" required>
+      <mat-error>Name is required</mat-error>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <p class="mat-title">How many modifiers can be chosen at the same time?</p>
+    <mat-radio-group [(ngModel)]="modificationGroup.type" fxLayout="column" fxLayoutGap="30px">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-radio-button value="CHOOSE_ONE">Only one</mat-radio-button>
+          <p class="mat-caption">Choose one option from several. <br> For example, degree of spice.</p>
+        </div>
+        <img src="assets/images/spicy.png" width="250"fxFlexAlign="start">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="column" fxLayoutGap="10px">
+          <mat-radio-button #choseMultiple value="CHOOSE_MULTIPLE">Several</mat-radio-button>
+          <p class="mat-caption">Any number in a given range.<br>For example, extra ingredients for a pizza.</p>
+          <div *ngIf="choseMultiple.checked" fxLayout="row" fxLayoutGap="15px">
+            <mat-form-field appearance="outline" style="width: 100px">
+              <mat-label>Minimum</mat-label>
+              <input matInput [formControl]="minNumFormControl" [(ngModel)]="modificationGroup.minNum" pattern="[0-9]+" placeholder="Ex. 1" autocomplete="off" required>
+              <mat-error>Please enter minimum number</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100px">
+              <mat-label>Maximum</mat-label>
+              <input matInput [formControl]="maxNumFormControl" [(ngModel)]="modificationGroup.maxNum" pattern="[0-9]+" placeholder="Ex. 10" autocomplete="off" required>
+              <mat-error>Please enter maximum number</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <img src="assets/images/pizza-ingredients.png" width="250" fxFlexAlign="start">
+      </div>
+    </mat-radio-group>
+  </div>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary" (click)="onAddClick()" [disabled]="addBtnDisabled">Add</button>
+</div>
+

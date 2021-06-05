@@ -19,8 +19,8 @@ public class OrderedItem extends BaseEntity {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "menu_item_id")
-    private MenuItem menuItem;
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @ManyToMany
     @JoinTable (

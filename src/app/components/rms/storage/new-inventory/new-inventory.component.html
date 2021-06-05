@@ -1,0 +1,34 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Inventory' : 'Edit Inventory'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="20px" class="p1" style="width: 600px">
+      <div style="width: 300px" fxLayout="row">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Date and time of inventory check</mat-label>
+          <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="date" autocomplete="off">
+          <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+      <div class="p1" style="background: whitesmoke; border-radius: 10px" fxLayout="column" fxLayoutGap="15px">
+        <h2 class="p0 m0">Products</h2>
+        <div *ngFor="let item of itemInventories; let i = index">
+          <app-item-inventory [items]="items"
+                           [(itemInventory)]="itemInventories[i]"
+                           (deleteClick)="onDeleteItemInventoryClick(item)">
+          </app-item-inventory>
+        </div>
+        <button mat-button color="primary" fxFlexAlign="start" (click)="onAddItemInventoryClick()">
+          <span>+ Add more</span>
+        </button>
+      </div>
+      <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

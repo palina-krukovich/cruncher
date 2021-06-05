@@ -1,6 +1,5 @@
 package com.pk.cruncher.config;
 
-import com.pk.cruncher.security.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

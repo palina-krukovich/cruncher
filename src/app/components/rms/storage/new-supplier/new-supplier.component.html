@@ -1,0 +1,31 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Supplier' : 'Edit Supplier'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="10px" class="p1" style="max-width: 400px">
+      <mat-form-field appearance="outline">
+        <mat-label>Supplier name</mat-label>
+        <input matInput [formControl]="name" placeholder="Ex. BBQ Supplies" autocomplete="off">
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput [formControl]="address" placeholder="Ex. Green st. 10" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput [formControl]="phoneNumber" mask="+000 (00) 000-00-00" placeholder="Ex. +375 (29) 323-12-86" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <textarea matInput [formControl]="comment" autocomplete="off" style="white-space: pre-wrap;"></textarea>
+      </mat-form-field>
+      <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

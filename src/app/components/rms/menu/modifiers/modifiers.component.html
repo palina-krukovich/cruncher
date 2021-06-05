@@ -1,0 +1,30 @@
+<div class="p1" style="background: whitesmoke; border-radius: 10px" fxLayout="column" fxLayoutGap="20px">
+  <h2 class="p0 m0">
+    Modifiers <br>
+    <span class="mat-caption">Selection among varieties or additions of extra ingredients</span>
+  </h2>
+  <div *ngFor="let modificationGroup of modificationGroups; let i = index">
+    <span class="mat-body-2">{{modificationGroup.name}}</span>
+    (<span class="mat-caption" *ngIf="modificationGroup.type === 'CHOOSE_ONE'">Choose one sort from several</span>
+    <span class="mat-caption" *ngIf="modificationGroup.type === 'CHOOSE_MULTIPLE'">
+      Several from the set,
+      {{modificationGroup.minNum === 0 ? '' : ' from ' + modificationGroup.minNum}}
+      {{modificationGroup.maxNum === 0 ? '' : ' to ' + modificationGroup.maxNum}}
+      ingredients in order
+    </span>)
+    <div fxLayout="column" style="margin-top: 12px">
+      <div *ngFor="let modification of modificationGroup.modifications; let i = index">
+        <app-modification *ngIf="!!ingredients"
+                          [ingredients]="ingredients"
+                          [(modification)]="modificationGroup.modifications[i]"
+                          (modificationChange)="onChange()"
+                          (deleteClick)="onDeleteClick(modificationGroup, modification)">
+        </app-modification>
+      </div>
+      <button mat-button color="primary" fxFlexAlign="start" (click)="onAddModifierClick(modificationGroup)">
+        <span>+ Add a modifier to the <span style="font-weight: bold">{{modificationGroup.name}}</span> set</span>
+      </button>
+    </div>
+  </div>
+  <button mat-stroked-button color="primary" (click)="onAddModificationGroupClick()" fxFlexAlign="start">Add modifiers set</button>
+</div>

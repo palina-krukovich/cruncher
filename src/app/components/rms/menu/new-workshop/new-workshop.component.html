@@ -1,0 +1,19 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Workshop' : 'Edit Workshop'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="10px" class="p1" style="max-width: 400px">
+      <mat-form-field appearance="outline">
+        <mat-label>Workshop name</mat-label>
+        <input matInput [formControl]="name" placeholder="Ex. Kitchen" autocomplete="off">
+        <mat-error>Name is required</mat-error>
+      </mat-form-field>
+      <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

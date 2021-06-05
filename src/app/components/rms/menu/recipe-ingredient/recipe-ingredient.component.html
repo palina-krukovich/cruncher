@@ -1,0 +1,39 @@
+<div fxLayout="row" fxLayoutGap="25px">
+  <mat-form-field appearance="outline">
+    <mat-label>Ingredient</mat-label>
+    <mat-select [(value)]="ingredientId" (valueChange)="update();onChange()">
+      <mat-option *ngFor="let i of ingredients" [value]="i.id">
+        {{i.name}} ({{i.type.toLowerCase()}})
+      </mat-option>
+    </mat-select>
+    <mat-error>Please select ingredient</mat-error>
+  </mat-form-field>
+  <div fxLayout="row" fxFlex fxFlexAlign="center" fxLayoutAlign="space-around">
+    <mat-checkbox [(ngModel)]="cleared" [disabled]="!ingredient || ingredient.unit !== 'KG'" (ngModelChange)="update();onChange()">Cleared</mat-checkbox>
+    <mat-checkbox [(ngModel)]="boiled" [disabled]="!ingredient || ingredient.unit !== 'KG'" (ngModelChange)="update();onChange()">Boiled</mat-checkbox>
+    <mat-checkbox [(ngModel)]="fried" [disabled]="!ingredient || ingredient.unit !== 'KG'" (ngModelChange)="update();onChange()">Fried</mat-checkbox>
+    <mat-checkbox [(ngModel)]="stewed" [disabled]="!ingredient || ingredient.unit !== 'KG'" (ngModelChange)="update();onChange()">Stewed</mat-checkbox>
+    <mat-checkbox [(ngModel)]="baked" [disabled]="!ingredient || ingredient.unit !== 'KG'" (ngModelChange)="update();onChange()">Baked</mat-checkbox>
+  </div>
+  <mat-form-field appearance="outline" style="width: 100px">
+    <mat-label>Gross</mat-label>
+    <input matInput [(ngModel)]="grossQuantity" (ngModelChange)="update()" (change)="onChange()" autocomplete="off">
+    <span matSuffix>{{ingredient?.unit?.toLowerCase() || 'kg'}}</span>
+    <mat-error>Gross should be more than zero</mat-error>
+  </mat-form-field>
+  <button mat-icon-button fxFlexAlign="center" color="{{lock ? 'primary' : ''}}" (click)="toggleLock(); update(); onChange()">
+    <mat-icon>link</mat-icon>
+  </button>
+  <mat-form-field appearance="outline" style="width: 100px">
+    <mat-label>Net</mat-label>
+    <input matInput [(ngModel)]="netQuantity" (ngModelChange)="update()" (change)="onChange()" [disabled]="lock" autocomplete="off">
+    <span matSuffix>kg</span>
+    <mat-error>Net should be more than zero</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 100px">
+    <mat-label>Cost</mat-label>
+    <input matInput disabled [value]="cost / 100">
+    <span matSuffix>Br</span>
+  </mat-form-field>
+  <button mat-icon-button fxFlexAlign="center" (click)="onDeleteClick()"><mat-icon>close</mat-icon></button>
+</div>

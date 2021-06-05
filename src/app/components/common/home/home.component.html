@@ -1,0 +1,18 @@
+<div fxFlexFill fxLayout="column">
+  <app-nav></app-nav>
+  <div fxFlex fxLayout="column" fxLayout.gt-md="row" fxLayoutAlign="center" fxLayoutGap="24px">
+    <mat-card *ngFor="let m of modules" matRipple fxFlexAlign="center" (click)="m.handle()" class="mat-elevation-z4">
+      <mat-card-header>
+        <img mat-card-avatar fxShow fxHide.gt-md [src]="m.smImgSrc" [alt]="m.shortName">
+        <mat-card-title>{{m.shortName}}</mat-card-title>
+        <mat-card-subtitle>{{m.fullName}}</mat-card-subtitle>
+      </mat-card-header>
+      <img fxHide fxShow.gt-md mat-card-image [src]="m.lgImgSrc" [alt]="m.shortName">
+    </mat-card>
+  </div>
+  <div class="squares-box">
+    <div class="squares">
+      <div *ngFor="let num of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" [class]="'square square-' + num"></div>
+    </div>
+  </div>
+</div>

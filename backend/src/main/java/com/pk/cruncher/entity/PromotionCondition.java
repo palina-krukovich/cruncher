@@ -22,12 +22,12 @@ public class PromotionCondition extends BaseEntity {
     private ItemType type;
 
     @ManyToOne
-    @JoinColumn(name = "manu_item_id")
-    private MenuItem menuItem;
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "menu_category_id")
-    private MenuCategory menuCategory;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private Long quantity;
 

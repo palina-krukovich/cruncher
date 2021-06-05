@@ -16,9 +16,7 @@ import java.util.UUID;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, updatable = false)
+    @GeneratedValue
     protected UUID id;
 
     @CreatedDate

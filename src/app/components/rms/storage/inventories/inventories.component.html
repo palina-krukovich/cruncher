@@ -1,0 +1,40 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Inventory Checks"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                (addClick)="onAddClick()"
+    ></app-navbar>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let inventoryDate of inventoryDates" [value]="inventoryDate">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxLayout="row" fxLayoutGap="20px">
+            <span fxFlexAlign="center">{{inventoryDate | date: 'EEE, d MMM y, h:mm'}}</span>
+            <span *ngIf="getInventoryResult(inventoryDate) / 100 >= 0" fxFlexAlign="center" style="color: green">
+              +{{getInventoryResult(inventoryDate) / 100}}Br
+            </span>
+            <span *ngIf="getInventoryResult(inventoryDate) / 100 < 0" fxFlexAlign="center" style="color: red">
+              {{getInventoryResult(inventoryDate) / 100}}Br
+            </span>
+          </div>
+          <div fxLayout="row">
+            <button mat-icon-button (click)="onViewClick(inventoryDate)">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="onEditClick(inventoryDate)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(inventoryDate)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>

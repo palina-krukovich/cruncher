@@ -2,26 +2,24 @@ package com.pk.cruncher.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
-@IdClass(RecipeIngredient.RecipeIngredientId.class)
-public class RecipeIngredient {
+public class RecipeIngredient extends BaseEntity {
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "structure_id")
-    private PreparedItem structure;
+    private Item structureItem;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    private IngredientItem ingredient;
+    private Item ingredientItem;
 
     private Double grossQuantity;
 
@@ -38,12 +36,4 @@ public class RecipeIngredient {
     private Boolean stewed;
 
     private Boolean baked;
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class RecipeIngredientId implements Serializable {
-        private PreparedItem structure;
-        private IngredientItem ingredient;
-    }
 }

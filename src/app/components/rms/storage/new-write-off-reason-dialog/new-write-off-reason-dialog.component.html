@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Add Write Off Reason</h1>
+<div mat-dialog-content fxLayout="column" fxLayoutGap="10px">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="name" autocomplete="off">
+    <mat-error>Name is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput [formControl]="description" autocomplete="off"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onAddClick()" [disabled]="saveBtnDisabled" color="primary">Add</button>
+</div>

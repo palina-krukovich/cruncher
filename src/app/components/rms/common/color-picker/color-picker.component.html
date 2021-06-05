@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutGap="8px">
+  <div *ngFor="let c of colors"
+       style="width: 25px; height: 25px; border: 3px solid white; border-radius: 50%; cursor: pointer"
+       [class]="c + (c === color ? ' mat-elevation-z4' : '')"
+       (click)="selectColor(c)"
+  ></div>
+</div>

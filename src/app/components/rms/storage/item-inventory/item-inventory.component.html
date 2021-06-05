@@ -1,0 +1,18 @@
+<div fxLayout="row" fxLayoutGap="25px">
+  <mat-form-field appearance="outline">
+    <mat-label>Product</mat-label>
+    <mat-select [formControl]="itemId">
+      <mat-option *ngFor="let i of items" [value]="i.id">
+        {{i.name}} ({{i.itemType.toLowerCase()}})
+      </mat-option>
+    </mat-select>
+    <mat-error>Please select product</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Actual Quantity</mat-label>
+    <input matInput [formControl]="actualQuantity" autocomplete="off">
+    <span matSuffix>{{defaultUnit}}</span>
+    <mat-error>Quantity is required</mat-error>
+  </mat-form-field>
+  <button mat-icon-button fxFlexAlign="center" (click)="onDeleteClick()"><mat-icon>close</mat-icon></button>
+</div>

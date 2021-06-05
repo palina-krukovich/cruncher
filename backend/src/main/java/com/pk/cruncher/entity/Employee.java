@@ -20,6 +20,7 @@ public class Employee extends BaseEntity {
 
     private String phone;
 
+    @Column(length = 320)
     private String email;
 
     private String address;

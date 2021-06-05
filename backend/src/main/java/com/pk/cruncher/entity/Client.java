@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -28,6 +25,7 @@ public class Client extends BaseEntity {
 
     private String phoneNumber;
 
+    @Column(length = 320)
     private String email;
 
     private OffsetDateTime birthday;

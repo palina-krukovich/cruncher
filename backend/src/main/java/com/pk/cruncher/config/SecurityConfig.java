@@ -1,7 +1,6 @@
 package com.pk.cruncher.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pk.cruncher.security.SecurityFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -65,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling().authenticationEntryPoint(getAuthenticationEntryPoint())
             .and().authorizeRequests()
             .antMatchers("/public/**").permitAll()
-            .anyRequest().authenticated()
+            .anyRequest().hasAuthority("user")
             .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

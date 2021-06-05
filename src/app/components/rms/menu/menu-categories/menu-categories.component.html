@@ -1,0 +1,45 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Menu Categories"
+                [trashEnabled]="true"
+                [addEnabled]="true"
+                (trashClick)="showTrashDialog()"
+                (addClick)="openNewCategoryPage()"
+    ></app-navbar>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="tree-list">
+      <mat-tree-node *matTreeNodeDef="let category" matTreeNodeToggle>
+        <li class="mat-tree-node px1" fxLayoutGap="12px">
+          <button mat-icon-button disabled></button>
+          <app-table-img [color]="category.color" [photoURL]="category.photoURL" [name]="category.name"></app-table-img>
+          <span fxFlexAlign="center">{{category.name}}</span>
+          <div fxFlex></div>
+          <button mat-icon-button color="primary" (click)="openEditCategoryPage(category)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="deleteCategory(category)"><mat-icon>delete</mat-icon></button>
+        </li>
+      </mat-tree-node>
+      <mat-nested-tree-node *matTreeNodeDef="let category; when: hasChild">
+        <li>
+          <div class="mat-tree-node px1" fxLayoutGap="12px">
+            <button mat-icon-button matTreeNodeToggle>
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(category) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <app-table-img [color]="category.color" [photoURL]="category.photoURL" [name]="category.name"></app-table-img>
+            <span fxFlexAlign="center">{{category.name}}</span>
+            <div fxFlex></div>
+            <button mat-icon-button color="primary" (click)="openEditCategoryPage(category)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="deleteCategory(category)"><mat-icon>delete</mat-icon></button>
+          </div>
+          <ul [class.display-none]="!treeControl.isExpanded(category)">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </ul>
+        </li>
+      </mat-nested-tree-node>
+    </mat-tree>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

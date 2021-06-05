@@ -34,7 +34,7 @@ public class ItemSupply {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class ItemSupplyId implements Serializable {
+    public static class ItemSupplyId implements Serializable {
         private Item item;
         private Supply supply;
     }

@@ -1,0 +1,49 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Prepack' : 'Edit Prepack'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="20px" class="p1">
+      <div fxLayout="column" fxLayoutGap="10px" style="width: 480px">
+        <mat-form-field appearance="outline">
+          <mat-label>Prepack name</mat-label>
+          <input matInput [formControl]="name" placeholder="Ex. Dough" autocomplete="off">
+          <mat-error>Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Internal Code</mat-label>
+          <input matInput [formControl]="code" placeholder="Ex. DGH_123" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Production Description</mat-label>
+          <textarea matInput #description [formControl]="productionDescription" autocomplete="off" style="white-space: pre-wrap;"></textarea>
+          <mat-hint align="end">{{description.value.length}} / 4096</mat-hint>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutGap="25px">
+          <mat-form-field appearance="outline">
+            <mat-label>Cook time Minutes</mat-label>
+            <input matInput [formControl]="cookTimeMinutes" autocomplete="off">
+            <span matSuffix>min</span>
+            <mat-error>Digits only are expected</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cook time Seconds</mat-label>
+            <input matInput [formControl]="cookTimeSeconds" autocomplete="off">
+            <span matSuffix>s</span>
+            <mat-error>Digits only are expected</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxLayoutGap="20px">
+          <app-image-select [(file)]="imgFile" [(initialImg)]="initialImg"></app-image-select>
+          <app-color-picker [(color)]="color"></app-color-picker>
+        </div>
+      </div>
+      <app-recipe [(recipeIngredients)]="recipeIngredients"></app-recipe>
+      <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
