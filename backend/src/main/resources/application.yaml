@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: cruncher-api
+  cloud:
+    gcp:
+      sql:
+        database-name: cruncher
+        instance-connection-name: cruncher-3:us-central1:cruncher
+        ip-types: PUBLIC
   datasource:
     platform: postgres
     url: jdbc:postgresql://34.68.102.175:5432/cruncher
@@ -13,7 +19,7 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 security:
   allowed-headers:
     - Authorization
