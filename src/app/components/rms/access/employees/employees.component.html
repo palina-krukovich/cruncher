@@ -1,0 +1,67 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Employees"
+                [columnsEnabled]="true"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                [trashEnabled]="true"
+                [(columns)]="columns"
+                (addClick)="onAddClick()"
+                (trashClick)="onTrashClick()"
+    ></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Position">
+        <th mat-header-cell *matHeaderCellDef> Position </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.position.title || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.gender.toLowerCase() || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.email || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.phone | mask: '+000 (00) 000-00-00' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Permissions">
+        <th mat-header-cell *matHeaderCellDef> Permissions </th>
+        <td mat-cell *matCellDef="let employee">{{ getPermissions(employee) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.address || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.createdAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Updated">
+        <th mat-header-cell *matHeaderCellDef> Updated </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.updatedAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let employee">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button color="primary" (click)="onEditClick(employee)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(employee)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,28 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Positions"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                (addClick)="onAddClick()">
+    </app-navbar>
+    <div class="p1">
+      <div *ngFor="let position of positions" fxLayout="column" fxLayoutGap="8px">
+        <div fxLayout="row">
+          <span fxFlexAlign="center" class="mat-body-2">{{position.title}}</span>
+          <div fxFlex></div>
+          <button mat-icon-button color="primary" (click)="onEditClick(position)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="onDeleteClick(position)"><mat-icon>delete</mat-icon></button>
+        </div>
+        <div *ngIf="!!position.description">
+          {{position.description}}
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

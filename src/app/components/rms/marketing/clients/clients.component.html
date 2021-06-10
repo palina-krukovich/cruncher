@@ -1,0 +1,82 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Customers"
+                [columnsEnabled]="true"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                [trashEnabled]="true"
+                [(columns)]="columns"
+                (addClick)="onAddClick()"
+                (trashClick)="onTrashClick()"
+    ></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let client"> {{client.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Customer Group">
+        <th mat-header-cell *matHeaderCellDef> Customer Group </th>
+        <td mat-cell *matCellDef="let client"> {{client.clientGroup.name}} ({{client.clientGroup.discountRate}}%)</td>
+      </ng-container>
+      <ng-container matColumnDef="Personal Discount">
+        <th mat-header-cell *matHeaderCellDef> Personal Discount </th>
+        <td mat-cell *matCellDef="let client"> {{client.discountRate}} %</td>
+      </ng-container>
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let client"> {{client.gender.toLowerCase()}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let client"> {{client.email || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let client">
+          <span *ngIf="!!client.phone">{{client.phone | mask: '+000 (00) 000-00-00' }}</span>
+          <span *ngIf="!client.phone">-</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Birthday">
+        <th mat-header-cell *matHeaderCellDef> Birthday </th>
+        <td mat-cell *matCellDef="let client">{{ client.birthday | date: 'd MMM y' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let client"> {{client.address || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Card Number">
+        <th mat-header-cell *matHeaderCellDef> Card Number </th>
+        <td mat-cell *matCellDef="let client"> {{client.cardNumber | mask: '000 000 000 000'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Comment">
+        <th mat-header-cell *matHeaderCellDef> Comment </th>
+        <td mat-cell *matCellDef="let client"> {{client.comment || '-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let client"> {{client.createdAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Updated">
+        <th mat-header-cell *matHeaderCellDef> Updated </th>
+        <td mat-cell *matCellDef="let client"> {{client.updatedAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let client">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button color="primary" (click)="onEditClick(client)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(client)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

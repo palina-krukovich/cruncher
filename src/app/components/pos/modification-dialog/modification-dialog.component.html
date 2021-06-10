@@ -1,0 +1,42 @@
+<h1 mat-dialog-title fxLayoutAlign="center">{{data.name}}</h1>
+<div mat-dialog-content>
+  <div fxLayout="column" fxLayoutGap="12px">
+    <div *ngFor="let selectedModification of selectedModifications" fxLayout="column" fxLayoutGap="12px">
+      <span>
+        <span class="mat-body-2">{{selectedModification.modificationGroup.name}}</span>
+        <span class="mat-caption">
+          (
+          <span *ngIf="selectedModification.modificationGroup.type === 'CHOOSE_ONE'">Choose one from several</span>
+          <span *ngIf="selectedModification.modificationGroup.type === 'CHOOSE_MULTIPLE'">
+            {{selectedModification.modificationGroup.minNum === 0 ? '' : 'from ' + selectedModification.modificationGroup.minNum}}
+            {{selectedModification.modificationGroup.maxNum === 0 ? '' : ' up to ' + selectedModification.modificationGroup.maxNum}}
+          </span>
+          )
+        </span>
+      </span>
+      <div *ngIf="selectedModification.modificationGroup.type === 'CHOOSE_ONE'">
+        <mat-radio-group fxLayout="column" fxLayoutGap="12px" [(ngModel)]="selectedModification.modification">
+          <mat-radio-button *ngFor="let modification of selectedModification.modificationGroup.modifications"
+                            [value]="modification">
+            {{modification.name}} - <span
+            style="color: grey; font-weight: bolder">{{(modification.price / 100) || 0}} Br</span>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="selectedModification.modificationGroup.type === 'CHOOSE_MULTIPLE'" fxLayout="column"
+           fxLayoutGap="12px">
+        <mat-checkbox *ngFor="let modification of selectedModification.modifications"
+                      [(ngModel)]="modification.selected">
+          {{modification.modification.name}} - <span
+          style="color: grey; font-weight: bolder">{{(modification.modification.price / 100) || 0}} Br</span>
+        </mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions fxLayout="row">
+  <span class="mat-body-2">{{totalPrice / 100}} Br</span>
+  <div fxFlex></div>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-raised-button (click)="onAddClick()" color="accent">Add to the order</button>
+</div>

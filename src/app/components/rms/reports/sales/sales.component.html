@@ -1,0 +1,59 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Sales Report"></app-navbar>
+    <div class="p1" fxLayout="column" fxLayoutGap="25px">
+      <div fxLayout="row" fxLayoutAlign="space-between" class="p1 mat-elevation-z4">
+        <span class="mat-title p0 m0">Today, <br>{{todayStr | date: 'd MMMM'}}</span>
+        <span *ngFor="let todayValue of todayValues" fxLayout="column">
+          <span class="mat-caption">{{todayValue.label}}</span>
+          <span class="mat-title p0 m0">
+            {{ todayValue.value.toString() + (todayValue.displayCurrency ? ' Br' : '') }}
+            <sup class="mat-caption" style="font-weight: bolder" [style.color]="todayValue.percent >= 0 ? '#4F2A9D' : '#8b0000'">
+              {{ (todayValue.percent >= 0 ? '+' : '') + todayValue.percent + '%' }}
+            </sup>
+          </span>
+        </span>
+      </div>
+      <div fxLayout="column" fxLayoutGap="12px">
+        <span class="mat-title">Revenue</span>
+        <div style="height: 300px" class="p1 mat-elevation-z4" >
+          <canvas baseChart [datasets]="revenueChartData" [labels]="revenueChartLabels" [options]="chartOptions"
+                  [colors]="chartColorsOne" [legend]="false" chartType="line"></canvas>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxFlex="25" fxLayout="column" fxLayoutGap="12px" class="mat-elevation-z4 p1">
+          <span class="mat-title">Payment methods</span>
+          <div style="height: 200px">
+            <canvas baseChart [data]="paymentMethodsChartData" [labels]="paymentMethodsCharLabels" [options]="chartOptions"
+                    [colors]="chartColorsTwo" [legend]="true" chartType="pie"></canvas>
+          </div>
+        </div>
+        <div fxFlex="25" fxLayout="column" fxLayoutGap="12px" class="mat-elevation-z4 p1">
+          <span class="mat-title">Order Types</span>
+          <div style="height: 200px">
+            <canvas baseChart [data]="orderTypesChartData" [labels]="orderTypesChartLabels" [options]="chartOptions"
+                    [colors]="chartColorsTwo" [legend]="true" chartType="pie"></canvas>
+          </div>
+        </div>
+        <div fxFlex="46" fxLayout="column" fxLayoutGap="12px" class="mat-elevation-z4 p1">
+          <span class="mat-title">Sales by day of week</span>
+          <div style="height: 200px">
+            <canvas baseChart [datasets]="salesByDayOfWeekChartData" [labels]="salesByDayOfWeekChartLabels" [options]="chartOptions"
+                    [colors]="chartColorsOne" [legend]="false" chartType="bar"></canvas>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="12px">
+        <span class="mat-title">The most popular menu items</span>
+        <div style="height: 300px" class="p1 mat-elevation-z4" >
+          <canvas baseChart [datasets]="popularItemsChartData" [labels]="popularItemsChartLabels" [options]="chartOptions"
+                  [colors]="chartColorsOne" [legend]="false" chartType="bar"></canvas>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Employees performance report"></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.employeeName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Position">
+        <th mat-header-cell *matHeaderCellDef> Position </th>
+        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.employeePosition}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Revenue">
+        <th mat-header-cell *matHeaderCellDef> Revenue </th>
+        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.revenue}} Br </td>
+      </ng-container>
+      <ng-container matColumnDef="Receipts">
+        <th mat-header-cell *matHeaderCellDef> Receipts </th>
+        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.receipts}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Average Receipt">
+        <th mat-header-cell *matHeaderCellDef> Average Receipt </th>
+        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.averageReceipt}} Br</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

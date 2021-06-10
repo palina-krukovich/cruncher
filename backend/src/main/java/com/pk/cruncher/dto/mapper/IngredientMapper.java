@@ -8,13 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 
-// TODO: make it calculate inventory and cost/price using all supplies not last
-
 @Component
 public class IngredientMapper implements BaseMapper<Item, IngredientDTO> {
     @Override
     public IngredientDTO toDto(Item entity) {
-        return IngredientDTO.builder()
+        return entity == null ? null : IngredientDTO.builder()
             .id(entity.getId())
             .type(entity.getType().toString())
             .createdAt(entity.getCreatedAt())

@@ -1,0 +1,51 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Customer groups"
+                [columnsEnabled]="true"
+                [printEnabled]="true"
+                [exportEnabled]="true"
+                [importEnabled]="true"
+                [addEnabled]="true"
+                [trashEnabled]="true"
+                [(columns)]="columns"
+                (addClick)="onAddClick()"
+                (trashClick)="onTrashClick()"
+    ></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let clientGroup"> {{clientGroup.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Loyalty Type">
+        <th mat-header-cell *matHeaderCellDef> Loyalty Type </th>
+        <td mat-cell *matCellDef="let clientGroup"> {{clientGroup.loyaltyType === 'DISCOUNT' ? 'Discount system' : 'Cash-back rewards system'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Discount Rate">
+        <th mat-header-cell *matHeaderCellDef> Discount Rate </th>
+        <td mat-cell *matCellDef="let clientGroup"> {{clientGroup.discountRate}} % </td>
+      </ng-container>
+      <ng-container matColumnDef="Created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let clientGroup"> {{clientGroup.createdAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Updated">
+        <th mat-header-cell *matHeaderCellDef> Updated </th>
+        <td mat-cell *matCellDef="let clientGroup"> {{clientGroup.updatedAt | date: 'EEE, d MMM y, h:mm'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let clientGroup">
+          <div fxLayout="row" fxLayoutAlign="end">
+            <button mat-icon-button color="primary" (click)="onEditClick(clientGroup)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="onDeleteClick(clientGroup)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,2 @@
+insert into position (id, created_at, updated_at, description, title) values ('d8e5897c-3d03-4dbe-b00f-f1831b3e79a0', current_timestamp, current_timestamp, '', 'Director');
+insert into employee (id, created_at, updated_at, address, deleted, email, gender, name, phone, uid, position_id, rms, pos, kds) values ('6f9f71f7-2bde-45fb-a8fe-10d68c1fbc96', current_timestamp, current_timestamp, '', false, 'polina.krukovich7@gmail.com', 1, 'Polina Krukovich', '375291234567', 'r7qiEO1PFnbYLwytWbpv9MudN253', 'd8e5897c-3d03-4dbe-b00f-f1831b3e79a0', true, true, true);

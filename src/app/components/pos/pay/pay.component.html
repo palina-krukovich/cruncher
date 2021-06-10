@@ -1,0 +1,33 @@
+<div fxFlexFill fxLayout="column" style="background: whitesmoke">
+  <app-pos-nav></app-pos-nav>
+  <div fxFlex fxFlexAlign="center" fxLayout="column" class="container">
+    <h1 class="mat-subheading-1" fxFlexAlign="center" style="font-weight: bolder; letter-spacing: 3px">Receipt №{{order?.receiptNumber || ''}}</h1>
+    <h1 class="mat-h1">Total: <b>{{(order?.totalPrice || 0) / 100}}</b> Br</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Payed in Cash</mat-label>
+      <input matInput [formControl]="cash" autocomplete="off">
+      <mat-icon matPrefix>attach_money</mat-icon>
+      <button mat-icon-button matSuffix disabled>Br</button>
+      <button mat-icon-button matSuffix (click)="clearCash()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Payed by Card</mat-label>
+      <input matInput [formControl]="card" autocomplete="off">
+      <mat-icon matPrefix>credit_card</mat-icon>
+      <button mat-icon-button matSuffix disabled>Br</button>
+      <button mat-icon-button matSuffix (click)="clearCard()"><mat-icon>close</mat-icon></button>
+    </mat-form-field>
+    <div *ngIf="!isValidInput" style="color: darkred">
+      <b>Invalid input amount.</b> Sum payed by card must be exact!
+    </div>
+    <div style="padding-top: 15px; padding-bottom: 25px"><mat-divider></mat-divider></div>
+    <mat-form-field appearance="outline">
+      <mat-label>Change</mat-label>
+      <input matInput disabled autocomplete="off" [value]="change">
+      <mat-icon matPrefix>savings</mat-icon>
+      <button mat-icon-button matSuffix disabled>Br</button>
+    </mat-form-field>
+    <div fxFlex></div>
+    <button mat-stroked-button [disabled]="!isValidInput" (click)="onPayCLick()">Pay</button>
+  </div>
+</div>

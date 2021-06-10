@@ -16,7 +16,7 @@ public class RecipeIngredientMapper implements BaseMapper<RecipeIngredient, Reci
     public RecipeIngredientDTO toDto(RecipeIngredient entity) {
         return RecipeIngredientDTO.builder()
             .id(entity.getId())
-            .ingredient(ingredientMapper.toDto(entity.getIngredientItem()))
+            .ingredient(entity.getIngredientItem() == null ? null : ingredientMapper.toDto(entity.getIngredientItem()))
             .grossQuantity(entity.getGrossQuantity())
             .netQuantity(entity.getNetQuantity())
             .lock(entity.getLock())

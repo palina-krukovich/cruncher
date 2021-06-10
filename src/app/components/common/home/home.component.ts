@@ -24,7 +24,7 @@ export class HomeComponent {
       fullName: 'Point Of Sale',
       smImgSrc: 'assets/images/pineapple_4_64.png',
       lgImgSrc: 'assets/images/pineapple_4_512.png',
-      handle: () => this.router.navigate(['home'])
+      handle: () => this.router.navigate(['pos/board'])
     },
     {
       shortName: 'KDS',

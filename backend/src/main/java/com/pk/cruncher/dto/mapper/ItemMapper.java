@@ -13,6 +13,7 @@ public class ItemMapper implements BaseMapper<Item, ItemDTO> {
             .name(entity.getName())
             .itemType(entity.getType().toString())
             .unit(entity.getUnit() == null ? null : entity.getUnit().toString())
+            .price(entity.getPrice())
             .build();
     }
 }

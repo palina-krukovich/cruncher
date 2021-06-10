@@ -3,4 +3,5 @@ export interface Item {
   name: string;
   itemType: string;
   unit: string;
+  price: number;
 }

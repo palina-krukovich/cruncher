@@ -1,6 +1,5 @@
 package com.pk.cruncher.entity;
 
-import com.pk.cruncher.entity.type.ReservationStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,8 +22,6 @@ public class Reservation extends BaseEntity {
     )
     private List<DiningTable> diningTables;
 
-    private ReservationStatus status;
-
     private Long guestsCount;
 
     private OffsetDateTime startsAt;
@@ -42,4 +39,6 @@ public class Reservation extends BaseEntity {
     private String email;
 
     private String comment;
+
+    private Boolean canceled;
 }

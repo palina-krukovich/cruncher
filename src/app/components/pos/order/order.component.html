@@ -1,0 +1,138 @@
+<div fxFlexFill fxLayout="column">
+  <app-pos-nav></app-pos-nav>
+  <div fxFlex>
+    <mat-tab-group animationDuration="0ms" fxFlex fxFlexFill>
+      <mat-tab [label]="'Receipt №' + (order?.receiptNumber || '')">
+        <div fxFlex fxFlexFill fxLayout="row">
+          <div fxFlex fxLayout="column">
+            <table mat-table [dataSource]="dataSource" class="width-100">
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element">
+                  <div fxLayout="column">
+                    <span class="mat-body-2">{{element.itemName}}</span>
+                    <span *ngIf="!!element.promotionNames && element.promotionNames.length > 0" class="mat-caption">{{element.promotionNames.join(', ')}}</span>
+                    <span *ngIf="!!element.modificationNames && element.modificationNames.length > 0" class="mat-caption">{{element.modificationNames.join(', ')}}</span>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.subtotal / element.quantity / 100}} Br </td>
+              </ng-container>
+              <ng-container matColumnDef="Quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element">
+                  <div fxLayout="row" fxLayoutGap="8px">
+                    <mat-icon fxFlexAlign="center" color="warn" class="mat-elevation-z1" style="border-radius: 50%; cursor: pointer" (click)="onChangeQuantity(element, element.quantity - 1)">remove</mat-icon>
+                    <span fxFlexAlign="center">{{element.quantity}}</span>
+                    <mat-icon fxFlexAlign="center" color="primary" class="mat-elevation-z1" style="border-radius: 50%; cursor: pointer" (click)="onChangeQuantity(element, element.quantity + 1)">add</mat-icon>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Discount">
+                <th mat-header-cell *matHeaderCellDef> Discount </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.discountAmount > 0" fxLayout="column">
+                    <span>{{element.discountAmount  / 100}} Br</span>
+                    <span style="color: #f44336" class="mat-caption" *ngIf="element.discountRate > 0">-{{element.discountRate}}%</span>
+                  </span>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Subtotal">
+                <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+                <td mat-cell *matCellDef="let element">
+                  {{element.subtotal  / 100}} Br
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Total">
+                <th mat-header-cell *matHeaderCellDef> Total </th>
+                <td mat-cell *matCellDef="let element" class="mat-body-2"> {{element.totalPrice  / 100}} Br </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <div fxFlex></div>
+            <mat-divider></mat-divider>
+            <div fxLayout="column" class="p1" fxLayoutGap="12px">
+              <div fxLayout="row">
+                <span class="mat-body-2">Total</span>
+                <div fxFlex></div>
+                <span class="mat-body-2">{{(order?.totalPrice || 0) / 100}} Br</span>
+              </div>
+              <div fxLayout="row">
+                <button mat-stroked-button><mat-icon>more_horiz</mat-icon></button>
+                <div fxFlex></div>
+                <button mat-raised-button color="primary" style="width: 200px" (click)="onPayClick()">Pay</button>
+              </div>
+            </div>
+          </div>
+          <mat-divider vertical></mat-divider>
+          <div fxFlex fxLayout="column" style="padding: 12px" fxLayoutGap="12px">
+            <div fxLayout="row" style="padding-left: 12px;padding-right: 12px">
+              <button mat-icon-button (click)="onBackClick()" [disabled]="!currentCategory.parentCategory" fxFlexAlign="center"><mat-icon>keyboard_arrow_left</mat-icon></button>
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Search</mat-label>
+                <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="onOptionSelected(option)">
+                    {{option.name}} ({{option.type === 'CATEGORY' ? 'Category' : 'Menu Item'}})
+                  </mat-option>
+                </mat-autocomplete>
+                <span matPrefix><mat-icon>search</mat-icon></span>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="start" style="padding-left: 12px;padding-right: 12px">
+              <div *ngFor="let category of currentCategory.subCategories" fxFlex="25" style="padding: 0 6px 12px;">
+                <mat-card (click)="onCategoryClick(category)">
+                  <div mat-card-image
+                       *ngIf="!!category.photoURL"
+                       style="height: 100px; background-size: cover; background-position: center"
+                       [ngStyle]="{ 'background-image': 'url(' + category.photoURL + ')'}"></div>
+                  <div mat-card-image
+                       *ngIf="!category.photoURL"
+                       class="table-clr"
+                       [class]="category.color" style="height: 100px; font-size: 48px; font-weight: bold;"
+                       fxLayout="column"
+                       fxLayoutAlign="center">
+                    {{category.name.substr(0, 2).toUpperCase()}}
+                  </div>
+                  <mat-card-content class="mat-body-2" style="color: slategrey">
+                    {{category.name}}
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              <div *ngFor="let item of currentCategory.menuItems" fxFlex="25" style="padding: 0 6px 12px;">
+                <mat-card (click)="onItemClick(item)">
+                  <div mat-card-image
+                       *ngIf="!!item.photoURL"
+                       style="height: 100px; background-size: cover; background-position: center"
+                       [ngStyle]="{ 'background-image': 'url(' + item.photoURL + ')'}"></div>
+                  <div mat-card-image
+                       *ngIf="!item.photoURL"
+                       class="table-clr"
+                       [class]="item.color" style="height: 100px; font-size: 48px; font-weight: bold;"
+                       fxLayout="column"
+                       fxLayoutAlign="center">
+                    {{item.name.substr(0, 2).toUpperCase()}}
+                  </div>
+                  <mat-card-content class="mat-body-2" style="color: slategrey">
+                    {{item.name}}
+                    <span fxFlex></span>
+                    {{item.price / 100}}Br
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Customer">
+        <div fxFlex fxFlexFill>
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

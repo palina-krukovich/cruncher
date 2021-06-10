@@ -1,0 +1,23 @@
+package com.pk.cruncher.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.UUID;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MenuCategoryDTO {
+    private UUID id;
+    private String name;
+    private UUID parentCategoryId;
+    private List<MenuCategoryDTO> subCategories;
+    private String color;
+    private String photoURL;
+    private List<MenuItemDTO> menuItems;
+}

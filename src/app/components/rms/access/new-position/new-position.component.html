@@ -1,0 +1,23 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Position' : 'Edit Position'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="10px" class="p1" style="max-width: 400px">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [formControl]="title" placeholder="Ex. Manager" autocomplete="off">
+        <mat-error>Title is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput [formControl]="description" autocomplete="off" rows="10"></textarea>
+      </mat-form-field>
+      <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

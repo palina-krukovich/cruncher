@@ -1,0 +1,61 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Loyalty Programs"></app-navbar>
+    <div fxLayout="row" fxLayoutGap="28px">
+      <div fxLayout="column" class="p1" fxLayoutGap="10px" fxFlex>
+        <span class="mat-subheading-2 p0 m0">Cash-back rewards program</span>
+        <mat-divider></mat-divider>
+        <p class="mat-caption">
+          Customers can earn cash-back rewards and use them to fully or partly pay for their orders. You can configure different cash-back rewards for your customer groups.
+          If you want your customers to be able to transition to a group with better rewards, you can specify how much money they should spend before switching groups, and they will be automatically moved to the new group.
+        </p>
+        <div *ngFor="let loyaltyRule of bonusLoyaltyRules; let i = index" fxLayout="row" fxLayoutGap="28px" style="width: 450px">
+          <mat-form-field appearance="outline" style="width: 128px">
+            <mat-label>From</mat-label>
+            <input matInput [(ngModel)]="bonusLoyaltyRules[i].value" autocomplete="off">
+            <span matSuffix>Br</span>
+          </mat-form-field>
+          <mat-icon fxFlexAlign="center" color="primary">east</mat-icon>
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Customer Group</mat-label>
+            <mat-select [(ngModel)]="bonusLoyaltyRules[i].clientGroupId">
+              <mat-option *ngFor="let cg of bonusClientGroups" [value]="cg.id">{{cg.name}} ({{cg.discountRate}}%)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button fxFlexAlign="center" color="warn" (click)="onDeleteClick(loyaltyRule)"><mat-icon>close</mat-icon></button>
+        </div>
+        <button mat-button color="primary" fxFlexAlign="start" (click)="onAddRuleClick('CASH_BACK')">+ Add</button>
+      </div>
+      <div fxLayout="column" class="p1" fxLayoutGap="10px" fxFlex>
+        <span class="mat-subheading-2 p0 m0">Discount-based program</span>
+        <mat-divider></mat-divider>
+        <p class="mat-caption">
+          This program allows you to give discounts to your customers, and to create different discounts for your customer groups.
+          If you want your customers to be able to transition to a group with a higher discount, you can specify how much money they should spend before switching groups. Poster will automatically move them to the new group.
+        </p>
+        <div *ngFor="let loyaltyRule of discountLoyaltyRules; let i = index" fxLayout="row" fxLayoutGap="28px" style="width: 450px">
+          <mat-form-field appearance="outline" style="width: 128px">
+            <mat-label>From</mat-label>
+            <input matInput [(ngModel)]="discountLoyaltyRules[i].value" autocomplete="off">
+            <span matSuffix>Br</span>
+          </mat-form-field>
+          <mat-icon fxFlexAlign="center" color="primary">east</mat-icon>
+          <mat-form-field appearance="outline" fxFlex>
+            <mat-label>Customer Group</mat-label>
+            <mat-select [(ngModel)]="discountLoyaltyRules[i].clientGroupId">
+              <mat-option *ngFor="let cg of discountClientGroups" [value]="cg.id">{{cg.name}} ({{cg.discountRate}}%)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button fxFlexAlign="center" color="warn" (click)="onDeleteClick(loyaltyRule)"><mat-icon>close</mat-icon></button>
+        </div>
+        <button mat-button color="primary" fxFlexAlign="start" (click)="onAddRuleClick('DISCOUNT')">+ Add</button>
+      </div>
+    </div>
+    <div class="px1">
+      <button mat-raised-button color="accent" (click)="onSaveCLick()">Save</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

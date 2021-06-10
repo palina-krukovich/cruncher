@@ -17,7 +17,7 @@ public class ModificationMapper implements BaseMapper<Modification, Modification
         return ModificationDTO.builder()
             .id(entity.getId())
             .name(entity.getName())
-            .ingredient(ingredientMapper.toDto(entity.getModificationItem()))
+            .ingredient(entity.getModificationItem() == null ? null : ingredientMapper.toDto(entity.getModificationItem()))
             .withoutWriteOff(entity.getWithoutWriteOff())
             .quantity(entity.getQuantity())
             .price(entity.getPrice())

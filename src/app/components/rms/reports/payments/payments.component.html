@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar title="Payments Report"></app-navbar>
+    <table mat-table [dataSource]="dataSource" class="width-100">
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let orderReport"> {{orderReport.date | date: 'd MMM y' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Number of Receipts">
+        <th mat-header-cell *matHeaderCellDef> Number of Receipts </th>
+        <td mat-cell *matCellDef="let orderReport"> {{orderReport.numberOfReceipts}} </td>
+      </ng-container>
+      <ng-container matColumnDef="In Cash">
+        <th mat-header-cell *matHeaderCellDef> In Cash </th>
+        <td mat-cell *matCellDef="let orderReport"> {{orderReport.inCash / 100}} Br </td>
+      </ng-container>
+      <ng-container matColumnDef="By Card">
+        <th mat-header-cell *matHeaderCellDef> By Card </th>
+        <td mat-cell *matCellDef="let orderReport"> {{orderReport.byCard / 100}} Br</td>
+      </ng-container>
+      <ng-container matColumnDef="Total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let orderReport"> {{orderReport.total / 100}} Br </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

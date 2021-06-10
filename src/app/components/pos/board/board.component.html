@@ -1,1 +1,36 @@
-<p>board works!</p>
+<div fxFlexFill fxLayout="column">
+  <app-pos-nav></app-pos-nav>
+  <div fxFlex>
+    <div *ngIf="(!halls || halls.length === 0) && !loading" fxFlex fxFlexFill fxLayoutAlign="center" fxLayout="column" fxLayoutGap="12px">
+      <span fxFlexAlign="center" class="mat-body-2">There are no halls yet :(</span>
+      <button mat-raised-button fxFlexAlign="center" color="accent" (click)="onAddHallClick()">Add Hall</button>
+    </div>
+    <mat-tab-group *ngIf="!!halls && halls.length > 0" animationDuration="0ms" fxFlex fxFlexFill>
+      <mat-tab *ngFor="let hall of halls" [label]="hall.name">
+        <div fxFlex fxFlexFill class="hall-map" [id]="hall.id">
+          <div fxLayout="column" fxLayoutGap="16px" class="btn-panel">
+            <button mat-mini-fab color="primary" (click)="onAddHallClick()"><mat-icon>add</mat-icon></button>
+            <button mat-mini-fab color="accent" (click)="onEditHallClick(hall)"><mat-icon>edit</mat-icon></button>
+            <button mat-mini-fab color="warn" (click)="onDeleteHallClick(hall)"><mat-icon>delete</mat-icon></button>
+          </div>
+          <div *ngFor="let table of hall.tables"
+               class="table"
+               [class.circle]="table.shape === 'CIRCLE'"
+               [class.rect]="table.shape === 'RECT'"
+               [class.active]="table.hasActiveOrders"
+               [style.left.px]="table.x * getIndex(hall.id)"
+               [style.top.px]="table.y * getIndex(hall.id)"
+               [style.width.px]="table.width * getIndex(hall.id)"
+               [style.height.px]="table.height * getIndex(hall.id)"
+               fxLayout="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="12px"
+               (click)="onAddOrderClick(table)">
+            <span fxFlexAlign="center" style="user-select: none">{{table.name}}</span>
+            <span *ngIf="table.hasActiveOrders" fxFlexAlign="center" style="user-select: none">{{'Receipt ' + getReceiptNumbers(table)}}</span>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

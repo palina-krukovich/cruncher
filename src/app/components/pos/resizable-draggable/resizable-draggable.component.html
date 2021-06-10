@@ -1,0 +1,14 @@
+<div #box class="resizable-draggable"
+     [style.width.px]="width"
+     [style.height.px]="height"
+     [style.transform]="'translate3d('+ left + 'px,' + top + 'px,' + '0px)'"
+     [class.active]="status === 1 || status === 2"
+     [class.rect]="shape === 'RECT'"
+     [class.circle]="shape === 'CIRCLE'"
+     (mousedown)="setStatus($event, 2)"
+     (window:mouseup)="setStatus($event, 0)"
+     (dblclick)="toggleShape()"
+     fxLayoutAlign="center">
+    <div class="mat-body-2" fxFlexAlign="center" style="user-select: none">{{name}}</div>
+  <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+</div>

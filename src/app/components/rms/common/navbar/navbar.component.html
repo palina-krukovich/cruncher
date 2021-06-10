@@ -10,7 +10,7 @@
   <button *ngIf="exportEnabled" mat-button (click)="exportClick.emit()" fxFlexAlign="center">Export</button>
   <button *ngIf="importEnabled" mat-button (click)="importClick.emit()" fxFlexAlign="center">Import</button>
   <button *ngIf="printEnabled" mat-button (click)="printClick.emit()" fxFlexAlign="center">Print</button>
-  <mat-form-field *ngIf="dateRangeEnabled" appearance="standard" fxFlexAlign="center">
+  <mat-form-field *ngIf="dateRangeEnabled" appearance="outline" fxFlexAlign="center">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
       <input matStartDate formControlName="start" placeholder="Start date">

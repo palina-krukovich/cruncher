@@ -1,0 +1,38 @@
+:host ::ng-deep .mat-tab-body-wrapper {
+  height: 100%;
+}
+
+:host ::ng-deep .mat-tab-body.mat-tab-body-active {
+  height: 100%;
+}
+
+.hall-map {
+  position: relative;
+  background-color: whitesmoke;
+}
+
+.table {
+  position: absolute;
+  color: white;
+  background-color: #373d46;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.rect {
+  border-radius: 8px;
+}
+
+.active {
+  background-color: #673AB7;
+}
+
+.btn-panel {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}

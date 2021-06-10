@@ -1,36 +1,24 @@
 package com.pk.cruncher.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalTime;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
-@IdClass(PromotionPeriod.PromotionPeriodId.class)
-public class PromotionPeriod {
+public class PromotionPeriod extends BaseEntity {
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
-    @Id
-    private LocalTime startsAt;
+    private Long startHours;
+    private Long startMinutes;
 
-    @Id
-    private LocalTime endsAt;
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public class PromotionPeriodId implements Serializable {
-        private Promotion promotion;
-        private LocalTime startsAt;
-        private LocalTime endsAt;
-    }
+    private Long endHours;
+    private Long endMinutes;
 }

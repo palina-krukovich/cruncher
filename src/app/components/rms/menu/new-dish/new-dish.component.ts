@@ -91,11 +91,15 @@ export class NewDishComponent implements OnInit {
   }
 
   get cost(): number {
-    return this.recipeIngredients.map(ri => ri.ingredient?.cost || 0).reduce((x: number, y: number) => x + y, 0);
+    let cost = 0;
+    for (const ri of this.recipeIngredients) {
+      cost += (ri.ingredient?.cost || 0) * (ri.grossQuantity || 0);
+    }
+    return cost / 100;
   }
 
   get markup(): number {
-    return this.price.valid && !!this.cost ? (this.price.value / this.cost - 1) * 100 : 0;
+    return this.price.valid && !!this.cost ? Math.round((this.price.value / this.cost - 1) * 10000) / 100 : 0;
   }
 
   onBackClick(): void {

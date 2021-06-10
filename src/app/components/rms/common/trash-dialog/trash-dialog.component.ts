@@ -5,8 +5,8 @@ import {abbreviation} from '../../../../util/string-util';
 export interface TrashItem {
   id: string;
   name: string;
-  photoURL: string;
-  color: string;
+  photoURL: string | null;
+  color: string | null;
   deletedAt: Date;
 }
 

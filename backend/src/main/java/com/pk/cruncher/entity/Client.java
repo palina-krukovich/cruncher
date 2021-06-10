@@ -40,6 +40,8 @@ public class Client extends BaseEntity {
 
     private Double cashBackSum;
 
+    private Boolean deleted;
+
     @OneToMany(mappedBy = "client")
     private List<Order> orders;
 

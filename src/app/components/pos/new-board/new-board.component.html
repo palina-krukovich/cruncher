@@ -1,0 +1,45 @@
+<div fxFlexFill fxLayout="column">
+  <app-pos-nav></app-pos-nav>
+  <div fxFlex fxLayout="row">
+    <div #box_container fxFlex fxFlexFill class="box-container">
+      <app-resizable-draggable *ngFor="let table of tables; index as i"
+                               [(width)]="tables[i].width"
+                               [(height)]="tables[i].height"
+                               [(left)]="tables[i].x"
+                               [(top)]="tables[i].y"
+                               [(shape)]="tables[i].shape"
+                               [name]="tables[i].name"
+                               [parentWidth]="boxContainerWidth"
+                               [parentHeight]="boxContainerHeight"
+                               (click)="selectTable(table)">
+      </app-resizable-draggable>
+    </div>
+    <mat-divider vertical></mat-divider>
+    <div class="config-container" fxLayout="column" fxLayoutGap="12px">
+      <mat-form-field appearance="outline">
+        <mat-label>Hall name</mat-label>
+        <input matInput [formControl]="hallName" placeholder="Ex. Primary hall" autocomplete="off">
+        <mat-error>Hall name is required</mat-error>
+      </mat-form-field>
+      <button mat-button color="primary" (click)="onAddTableClick()">+ Add Table</button>
+      <div *ngIf="selectedTable" fxLayout="column" fxLayoutGap="12px">
+        <div class="mat-body-2">Active table</div>
+        <mat-form-field appearance="outline">
+          <mat-label>Table name</mat-label>
+          <input matInput [(ngModel)]="selectedTable.name" placeholder="Ex. 1" autocomplete="off" required>
+          <mat-error>Table name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Capacity</mat-label>
+          <mat-select [(ngModel)]="selectedTable.capacity">
+            <mat-option *ngFor="let capacity of capacities"  [value]="capacity">
+              {{capacity}}
+            </mat-option>
+          </mat-select>
+          <mat-error>Table name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="accent" (click)="onSaveClick()" [disabled]="saveDisabled">Save</button>
+    </div>
+  </div>
+</div>

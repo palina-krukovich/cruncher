@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class ClientGroup extends BaseEntity {
     private LoyaltyType loyaltyType;
 
     private Double discountRate;
+
+    private Boolean deleted;
 
     @OneToMany(mappedBy = "clientGroup")
     private List<Client> clients;

@@ -20,13 +20,9 @@ public class DiningTable extends BaseEntity {
 
     private String name;
 
-    private Long number;
-
     private Long capacity;
 
     private Shape shape;
-
-    private String color;
 
     private Double x;
 

@@ -28,6 +28,12 @@ public class Employee extends BaseEntity {
     @Column(unique = true)
     private String uid;
 
+    private Boolean rms;
+
+    private Boolean pos;
+
+    private Boolean kds;
+
     @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;

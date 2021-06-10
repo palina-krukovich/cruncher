@@ -21,10 +21,15 @@ export class SidebarComponent {
 
   public items = [
     {
-      label: 'Reports', icon: 'signal_cellular_alt',
-    },
-    {
-      label: 'Finances', icon: 'attach_money',
+      label: 'Reports', icon: 'signal_cellular_alt', items: [
+        {label: 'Sales', link: '/rms/reports/sales'},
+        {label: 'Employees', link: '/rms/reports/employees'},
+        {label: 'Tables', link: '/rms/reports/tables'},
+        {label: 'Categories', link: '/rms/reports/categories'},
+        {label: 'Products', link: '/rms/reports/products'},
+        {label: 'ABC-analysis', link: '/rms/reports/abc-analysis'},
+        {label: 'Payments', link: '/rms/reports/payments'}
+      ]
     },
     {
       label: 'Menu', icon: 'notes', items: [
@@ -48,10 +53,9 @@ export class SidebarComponent {
     },
     {
       label: 'Marketing', icon: 'redeem', items: [
-        {label: 'Customers', link: '/rms/marketing/customers'},
-        {label: 'Customer Groups', link: '/rms/marketing/customer-groups'},
-        {label: 'Loyalty', link: '/rms/marketing/loyalty'},
-        {label: 'Exclusions', link: '/rms/marketing/exclusions'},
+        {label: 'Customers', link: '/rms/marketing/clients'},
+        {label: 'Customer Groups', link: '/rms/marketing/client-groups'},
+        {label: 'Loyalty', link: '/rms/marketing/loyalty-rules'},
         {label: 'Promotions', link: '/rms/marketing/promotions'}
       ]
     },

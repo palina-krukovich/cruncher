@@ -1,0 +1,109 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar [title]="mode == 'new' ? 'New Promotion' : 'Edit Promotion'"
+                [backEnabled]="true"
+                (backClick)="onBackClick()"
+    ></app-navbar>
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="column" style="max-width: 600px" class="p1">
+        <div fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field appearance="outline" style="width: 300px">
+            <mat-label>Promotion Name</mat-label>
+            <input matInput [(ngModel)]="promotion.name" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Promotion dates</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="promotion.startsAt" placeholder="Start date" autocomplete="off">
+              <input matEndDate [(ngModel)]="promotion.endsAt" placeholder="End date" autocomplete="off">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <mat-checkbox [(ngModel)]="promotion.accrualBonuses">Add cash-back rewards for promotional products</mat-checkbox>
+      </div>
+      <div class="px1" style="width: 650px">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="px1" fxLayout="column" style="width: 600px">
+        <span class="mat-title">Promotion Conditions</span>
+        <div fxLayout="column" fxLayoutGap="5px">
+          <mat-form-field appearance="outline">
+            <mat-label>Conditions of product ordering</mat-label>
+            <mat-select [(ngModel)]="promotion.conditionRule">
+              <mat-option value="OR">Either of the order conditions is performed</mat-option>
+              <mat-option value="AND">All order conditions are performed at the same time</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div style="background: whitesmoke;padding-top: 16px; padding-bottom: 8px" class="px1" fxLayout="column">
+            <div *ngFor="let condition of promotion.promotionConditions; let i = index" fxLayout="row" fxLayoutGap="20px">
+              <mat-form-field appearance="outline" fxFlex>
+                <mat-label>What should be ordered?</mat-label>
+                <mat-select [(ngModel)]="promotion.promotionConditions[i].itemId">
+                  <mat-option [value]="item.id" *ngFor="let item of items">{{item.name}} ({{item.itemType.toLowerCase()}})</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-button disabled fxFlexAlign="center">{{promotion.conditionExactly === 'EXACTLY' ? 'Exactly' : 'At least'}}</button>
+              <mat-form-field appearance="outline" style="width: 128px">
+                <mat-label>How much</mat-label>
+                <input matInput [(ngModel)]="promotion.promotionConditions[i].quantity" autocomplete="off">
+                <span matSuffix>pcs</span>
+              </mat-form-field>
+              <button mat-icon-button fxFlexAlign="center" color="warn" (click)="onDeleteCondition(condition)"><mat-icon>close</mat-icon></button>
+            </div>
+            <button mat-button color="primary" (click)="onAddConditionClick()" fxFlexAlign="start">+ Add</button>
+          </div>
+          <div fxLayout="column" fxLayoutGap="16px" fxFlexOffset="16px">
+            <span class="mat-body-2">Promotion days: </span>
+            <div fxLayout="row" fxLayoutGap="12px">
+              <mat-checkbox [(ngModel)]="promotion.activeMonday">Mon</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeTuesday">Tue</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeWednesday">Wed</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeThursday">Thu</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeFriday">Fri</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeSaturday">Sat</mat-checkbox>
+              <mat-checkbox [(ngModel)]="promotion.activeSunday">Sun</mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="px1" style="width: 650px">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="px1" fxLayout="column" style="width: 600px">
+        <span class="mat-title">Promotion Result</span>
+        <div fxLayout="column" fxLayoutGap="5px">
+          <mat-form-field appearance="outline">
+            <mat-label>What does the customer receive finally?</mat-label>
+            <mat-select #promotionResult [(ngModel)]="promotion.result" (ngModelChange)="promotion.discountValue = 0">
+              <mat-option value="DISCOUNT_AMOUNT">Fixed discount for each promotional product</mat-option>
+              <mat-option value="DISCOUNT_RATE">Discount rate for promotional products</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="promotionResult.value === 'DISCOUNT_AMOUNT'">
+            <mat-form-field appearance="outline" style="width: 128px">
+              <mat-label>Fixed Discount</mat-label>
+              <input matInput [(ngModel)]="promotion.discountValue" autocomplete="off">
+              <span matSuffix>Br</span>
+            </mat-form-field>
+          </div>
+          <div *ngIf="promotionResult.value === 'DISCOUNT_RATE'">
+            <mat-form-field appearance="outline" style="width: 128px">
+              <mat-label>Discount Rate</mat-label>
+              <input matInput [(ngModel)]="promotion.discountValue" autocomplete="off">
+              <span matSuffix>%</span>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="p1">
+        <button fxFlexAlign="start" mat-raised-button color="accent" [disabled]="saveDisabled" (click)="onSaveClick()">Save</button>
+      </div>
+      {{promotion | json}}
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

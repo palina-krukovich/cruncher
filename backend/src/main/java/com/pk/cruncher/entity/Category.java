@@ -30,12 +30,6 @@ public class Category extends BaseEntity {
 
     private Boolean deleted;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Item> items;
-
-    @OneToMany(mappedBy = "category")
-    private List<PromotionCondition> promotionConditions;
-
-    @OneToMany(mappedBy = "category")
-    private List<PromotionBonus> promotionBonuses;
 }

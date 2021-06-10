@@ -27,6 +27,28 @@ import {InventoriesComponent} from './components/rms/storage/inventories/invento
 import {NewInventoryComponent} from './components/rms/storage/new-inventory/new-inventory.component';
 import {ViewInventoryComponent} from './components/rms/storage/view-inventory/view-inventory.component';
 import {StockComponent} from './components/rms/storage/stock/stock.component';
+import {BoardComponent} from './components/pos/board/board.component';
+import {NewBoardComponent} from './components/pos/new-board/new-board.component';
+import {PositionsComponent} from './components/rms/access/positions/positions.component';
+import {NewPositionComponent} from './components/rms/access/new-position/new-position.component';
+import {EmployeesComponent} from './components/rms/access/employees/employees.component';
+import {NewEmployeeComponent} from './components/rms/access/new-employee/new-employee.component';
+import {ClientGroupsComponent} from './components/rms/marketing/client-groups/client-groups.component';
+import {NewClientGroupComponent} from './components/rms/marketing/new-client-group/new-client-group.component';
+import {ClientsComponent} from './components/rms/marketing/clients/clients.component';
+import {NewClientComponent} from './components/rms/marketing/new-client/new-client.component';
+import {LoyaltyRulesComponent} from './components/rms/marketing/loyalty-rules/loyalty-rules.component';
+import {PromotionsComponent} from './components/rms/marketing/promotions/promotions.component';
+import {NewPromotionComponent} from './components/rms/marketing/new-promotion/new-promotion.component';
+import {OrderComponent} from './components/pos/order/order.component';
+import {PayComponent} from './components/pos/pay/pay.component';
+import {SalesComponent} from './components/rms/reports/sales/sales.component';
+import {EmployeesReportComponent} from './components/rms/reports/employees-report/employees-report.component';
+import {TablesComponent} from './components/rms/reports/tables/tables.component';
+import {CategoriesComponent} from './components/rms/reports/categories/categories.component';
+import {ProductsRepostComponent} from './components/rms/reports/products-repost/products-repost.component';
+import {AbsAnalysisComponent} from './components/rms/reports/abs-analysis/abs-analysis.component';
+import {PaymentsComponent} from './components/rms/reports/payments/payments.component';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -38,6 +60,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToHome)},
   {path: 'home',  component: HomeComponent, ...canActivate(redirectUnauthorizedToLogin)},
+
   {path: 'rms/menu/ingredients', component: IngredientsComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/menu/ingredients/new', component: NewIngredientComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/menu/menu-categories', component: MenuCategoriesComponent, ...canActivate(hasRmsPermission)},
@@ -50,6 +73,7 @@ const routes: Routes = [
   {path: 'rms/menu/prepacks/new', component: NewPrepackComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/menu/dishes', component: DishesComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/menu/dishes/new', component: NewDishComponent, ...canActivate(hasRmsPermission)},
+
   {path: 'rms/inventory/packs', component: PacksComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/inventory/packs/new', component: NewPackComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/inventory/suppliers', component: SuppliersComponent, ...canActivate(hasRmsPermission)},
@@ -62,6 +86,33 @@ const routes: Routes = [
   {path: 'rms/inventory/inventories/new', component: NewInventoryComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/inventory/inventories/view', component: ViewInventoryComponent, ...canActivate(hasRmsPermission)},
   {path: 'rms/inventory/stock', component: StockComponent, ...canActivate(hasRmsPermission)},
+
+  {path: 'rms/access/positions', component: PositionsComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/access/positions/new', component: NewPositionComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/access/employees', component: EmployeesComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/access/employees/new', component: NewEmployeeComponent, ...canActivate(hasRmsPermission)},
+
+  {path: 'rms/marketing/client-groups', component: ClientGroupsComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/client-groups/new', component: NewClientGroupComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/clients', component: ClientsComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/clients/new', component: NewClientComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/loyalty-rules', component: LoyaltyRulesComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/promotions', component: PromotionsComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/marketing/promotions/new', component: NewPromotionComponent, ...canActivate(hasRmsPermission)},
+
+  {path: 'rms/reports/sales', component: SalesComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/employees', component: EmployeesReportComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/tables', component: TablesComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/categories', component: CategoriesComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/products', component: ProductsRepostComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/abc-analysis', component: AbsAnalysisComponent, ...canActivate(hasRmsPermission)},
+  {path: 'rms/reports/payments', component: PaymentsComponent, ...canActivate(hasRmsPermission)},
+
+  {path: 'pos/board', component: BoardComponent, ...canActivate(hasPosPermission)},
+  {path: 'pos/board/new', component: NewBoardComponent, ...canActivate(hasPosPermission)},
+  {path: 'pos/order', component: OrderComponent, ...canActivate(hasPosPermission)},
+  {path: 'pos/order/pay', component: PayComponent, ...canActivate(hasPosPermission)},
+
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];
 

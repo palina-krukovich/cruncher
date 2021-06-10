@@ -19,15 +19,9 @@ public class PromotionBonus extends BaseEntity {
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
-    private ItemType type;
-
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    private Long price;
+    private Long fixedPrice;
 }
