@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HallApiService} from '../../../api/hall-api.service';
-import {Hall} from '../../../model/hall';
 
 @Component({
   selector: 'app-pos-nav',
-  templateUrl: './pos-nav.component.html',
-  styleUrls: ['./pos-nav.component.scss']
+  templateUrl: './pos-nav.component.html'
 })
 export class PosNavComponent implements OnInit {
 

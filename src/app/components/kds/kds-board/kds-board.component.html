@@ -1,0 +1,25 @@
+<div fxFlexFill fxLayout="column" style="background: #3c3c3c">
+  <app-kds-nav></app-kds-nav>
+  <div fxFlex fxLayout="row" fxLayoutAlign="start" class="py1">
+    <div *ngFor="let order of orders" fxFlex="16.6" style="padding: 0 0 0 25px">
+      <div fxLayout="column" fxLayoutGap="16px">
+        <span fxLayout="column" style="color: whitesmoke; letter-spacing: 1px">
+          <span class="mat-title p0 m0">Receipt №{{order.receiptNumber}}</span>
+          <span class="mat-body-2 mat-caption" style="color: ghostwhite">{{order.employee.name}} - Table №{{order.tableName}}</span>
+        </span>
+        <div *ngFor="let item of order.items" class="mat-elevation-z4" style="border-radius: 2px; overflow: hidden; background: #5c5c5c; cursor: pointer" fxLayout="column" (dblclick)="onItemClick(item)">
+          <div style="height: 8px" [class]="item.status === 'OPEN' ? 'status-open' : item.status === 'IN_PROGRESS' ? 'status-in-progress' : 'status-ready'"></div>
+          <div fxLayout="column" style="padding: 16px; color: whitesmoke" fxLayoutGap="8px">
+            <span *ngIf="item.status === 'OPEN'" class="status mat-caption" style="background: rgb(255,113,190)" fxFlexAlign="start">Pending</span>
+            <span *ngIf="item.status === 'IN_PROGRESS'" class="status mat-caption" style="background: #ad7dfa" fxFlexAlign="start">In Progress</span>
+            <span *ngIf="item.status === 'READY'" class="status mat-caption" style="background: #676767" fxFlexAlign="start">Ready</span>
+            <span class="mat-body-2" fxLayout="row" fxLayoutAlign="space-between" style="letter-spacing: 1px">
+              <span>{{item.itemName}}</span>
+              <span>x{{item.quantity}}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

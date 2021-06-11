@@ -96,4 +96,24 @@ public class PosController {
         return orderService.closeOrder(orderId, payedCash, payedCard);
     }
 
+    @PostMapping("cancelOrder")
+    public OrderDTO cancelOrder(@RequestParam @NotNull UUID orderId) {
+        return orderService.cancelOrder(orderId);
+    }
+
+    @PostMapping("sendToKitchen")
+    public OrderDTO sendToKitchen(@RequestParam @NotNull UUID orderId) {
+        return orderService.sendToKitchen(orderId);
+    }
+
+    @GetMapping("getKitchenOrders")
+    public List<OrderDTO> getKitchenOrders() {
+        return orderService.getKitchenOrders();
+    }
+
+
+    @GetMapping("updateOrderedItemStatus")
+    public List<OrderDTO> updateOrderedItemStatus(@RequestParam @NotNull UUID orderItemId, @RequestParam @NotNull String status) {
+        return orderService.updateOrderedItemStatus(orderItemId, status);
+    }
 }

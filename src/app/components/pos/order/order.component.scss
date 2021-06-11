@@ -5,3 +5,25 @@
 :host ::ng-deep .mat-tab-body.mat-tab-body-active {
   height: 100%;
 }
+
+.status {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+.status-new {
+  background: #f44336;
+}
+
+.status-open {
+  background: #F27348;
+}
+
+.status-in-progress {
+  background: #DBB32E;
+}
+
+.status-ready {
+  background: forestgreen;
+}

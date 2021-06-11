@@ -49,6 +49,7 @@ import {CategoriesComponent} from './components/rms/reports/categories/categorie
 import {ProductsRepostComponent} from './components/rms/reports/products-repost/products-repost.component';
 import {AbsAnalysisComponent} from './components/rms/reports/abs-analysis/abs-analysis.component';
 import {PaymentsComponent} from './components/rms/reports/payments/payments.component';
+import {KdsBoardComponent} from './components/kds/kds-board/kds-board.component';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -112,6 +113,8 @@ const routes: Routes = [
   {path: 'pos/board/new', component: NewBoardComponent, ...canActivate(hasPosPermission)},
   {path: 'pos/order', component: OrderComponent, ...canActivate(hasPosPermission)},
   {path: 'pos/order/pay', component: PayComponent, ...canActivate(hasPosPermission)},
+
+  {path: 'kds/board', component: KdsBoardComponent, ...canActivate(hasKdsPermission)},
 
   {path: '**', redirectTo: '/home', pathMatch: 'full'}
 ];

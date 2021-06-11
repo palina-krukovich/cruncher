@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {FireAuthService} from '../service/fire-auth.service';
 import {HttpClient} from '@angular/common/http';
-import {Position} from '../model/position';
 import {Order} from '../model/order';
 import {MenuCategory} from '../model/menu-category';
 import {MenuItem} from '../model/menu-item';
@@ -74,6 +73,30 @@ export class OrderApiService {
         params: {orderId, payedCard: payedCard.toString(), payedCash: payedCash.toString()},
         headers: header
       });
+    });
+  }
+
+  cancelOrder(orderId: string): Promise<Observable<Order>> {
+    return this.auth.authHeader().then(header => {
+      return this.http.post<Order>(`${environment.api}pos/cancelOrder`, null, {params: {orderId}, headers: header});
+    });
+  }
+
+  sendToKitchen(orderId: string): Promise<Observable<Order>> {
+    return this.auth.authHeader().then(header => {
+      return this.http.post<Order>(`${environment.api}pos/sendToKitchen`, null, {params: {orderId}, headers: header});
+    });
+  }
+
+  getKitchenOrders(): Promise<Observable<Order[]>> {
+    return this.auth.authHeader().then(header => {
+      return this.http.get<Order[]>(`${environment.api}pos/getKitchenOrders`, {headers: header});
+    });
+  }
+
+  updateOrderedItemStatus(orderItemId: string, status: string): Promise<Observable<Order[]>> {
+    return this.auth.authHeader().then(header => {
+      return this.http.get<Order[]>(`${environment.api}pos/updateOrderedItemStatus`, {params: {orderItemId, status}, headers: header});
     });
   }
 }

@@ -17,7 +17,7 @@ export class HomeComponent {
       fullName: 'Restaurant Management System',
       smImgSrc: 'assets/images/pineapple_2_64.png',
       lgImgSrc: 'assets/images/pineapple_2_512.png',
-      handle: () => this.router.navigate(['rms/menu/ingredients'])
+      handle: () => this.router.navigate(['rms/reports/sales'])
     },
     {
       shortName: 'POS',
@@ -31,7 +31,7 @@ export class HomeComponent {
       fullName: 'Kitchen Display System',
       smImgSrc: 'assets/images/pineapple_7_64.png',
       lgImgSrc: 'assets/images/pineapple_7_512.png',
-      handle: () => this.router.navigate(['home'])
+      handle: () => this.router.navigate(['kds/board'])
     }
   ];
 }

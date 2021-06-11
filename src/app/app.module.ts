@@ -100,6 +100,8 @@ import {AbsAnalysisComponent} from './components/rms/reports/abs-analysis/abs-an
 import {PaymentsComponent} from './components/rms/reports/payments/payments.component';
 import {EmployeesReportComponent} from './components/rms/reports/employees-report/employees-report.component';
 import {ChartsModule} from 'ng2-charts';
+import { KdsBoardComponent } from './components/kds/kds-board/kds-board.component';
+import { KdsNavComponent } from './components/kds/kds-nav/kds-nav.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +173,8 @@ import {ChartsModule} from 'ng2-charts';
     AbsAnalysisComponent,
     PaymentsComponent,
     EmployeesReportComponent,
+    KdsBoardComponent,
+    KdsNavComponent,
   ],
   imports: [
     BrowserModule,

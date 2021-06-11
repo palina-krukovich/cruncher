@@ -11,5 +11,5 @@ export interface OrderItem {
   discountRate: number;
   discountAmount: number;
   totalPrice: number;
-  status: string;
+  status: 'NEW' | 'OPEN' | 'IN_PROGRESS' | 'READY';
 }

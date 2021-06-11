@@ -11,6 +11,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ConfirmDialogComponent} from '../../rms/common/confirm-dialog/confirm-dialog.component';
 
 export interface OrderItemRequest {
   id: string;
@@ -48,7 +50,7 @@ export class OrderComponent implements OnInit {
 
   currentCategory = this.topCategory;
 
-  displayedColumns = ['Name', 'Price', 'Quantity', 'Subtotal', 'Discount', 'Total'];
+  displayedColumns = ['Status', 'Name', 'Price', 'Quantity', 'Subtotal', 'Discount', 'Total'];
   dataSource = new MatTableDataSource<OrderItem>();
 
   searchControl = new FormControl();
@@ -58,7 +60,8 @@ export class OrderComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private api: OrderApiService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -100,6 +103,31 @@ export class OrderComponent implements OnInit {
     } else if (!!option.item) {
       this.onItemClick(option.item);
     }
+  }
+
+  onSendToKitchenClick(): void {
+    this.api.sendToKitchen(this.order?.id || '').then(obs => obs.subscribe(order => {
+      this.order = order;
+      this.updateDataSource();
+    }));
+  }
+
+  onCancelOrderClick(): void {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Cancel Order',
+        text: 'Are you sure you want to cancel order №"' + this.order?.receiptNumber + '"?',
+        yesBtn: true,
+        noBtn: true
+      }
+    }).afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.api.cancelOrder(this.order?.id || '').then(obs => obs.subscribe(order => {
+          this.snackBar.open('Cancel order №' + order.receiptNumber, 'Ok');
+          this.router.navigate(['/pos/board']);
+        }));
+      }
+    });
   }
 
   private _filter(name: string): FlatItem[] {

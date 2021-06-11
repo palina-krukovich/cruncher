@@ -187,9 +187,37 @@ public class OrderService {
         return orderMapper.toDto(orderRepository.save(order));
     }
 
+    public OrderDTO sendToKitchen(UUID orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        List<OrderedItem> orderedItems = order.getOrderedItems().stream()
+            .peek(orderedItem -> orderedItem.setStatus(orderedItem.getStatus() == OrderedItemStatus.NEW ? OrderedItemStatus.OPEN : orderedItem.getStatus()))
+            .collect(Collectors.toList());
+        orderedItemRepository.saveAll(orderedItems);
+        return orderMapper.toDto(orderRepository.findById(orderId).orElseThrow());
+    }
+
+    public List<OrderDTO> getKitchenOrders() {
+        return orderRepository.findAllByStatusOrderByCreatedAt(OrderStatus.NEW).stream()
+            .peek(order -> order.setOrderedItems(order.getOrderedItems().stream().filter(orderedItem -> orderedItem.getStatus() != OrderedItemStatus.NEW).collect(Collectors.toList())))
+            .peek(order -> order.getOrderedItems().sort(Comparator.comparing(OrderedItem::getCreatedAt)))
+            .map(orderMapper::toDto).collect(Collectors.toList());
+    }
+
+    public OrderDTO cancelOrder(UUID orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
+        order.setStatus(OrderStatus.CANCELED);
+        return orderMapper.toDto(orderRepository.save(order));
+    }
+
+    public List<OrderDTO> updateOrderedItemStatus(UUID orderedItemId, String status) {
+        OrderedItem orderedItem = orderedItemRepository.findById(orderedItemId).orElseThrow();
+        orderedItem.setStatus(OrderedItemStatus.valueOf(status));
+        orderedItemRepository.save(orderedItem);
+        return getKitchenOrders();
+    }
+
     private Optional<Employee> getCurrentEmployee() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return employeeRepository.findByUid(user.getUid());
     }
-
 }

@@ -6,6 +6,15 @@
         <div fxFlex fxFlexFill fxLayout="row">
           <div fxFlex fxLayout="column">
             <table mat-table [dataSource]="dataSource" class="width-100">
+              <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="status status-new" *ngIf="element.status === 'NEW'" matTooltip="New" matTooltipPosition="right"></div>
+                  <div class="status status-open" *ngIf="element.status === 'OPEN'" matTooltip="Sent to kitchen" matTooltipPosition="right"></div>
+                  <div class="status status-in-progress" *ngIf="element.status === 'IN_PROGRESS'" matTooltip="Preparing" matTooltipPosition="right"></div>
+                  <div class="status status-ready" *ngIf="element.status === 'READY'" matTooltip="Ready" matTooltipPosition="right"></div>
+                </td>
+              </ng-container>
               <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let element">
@@ -37,6 +46,7 @@
                     <span>{{element.discountAmount  / 100}} Br</span>
                     <span style="color: #f44336" class="mat-caption" *ngIf="element.discountRate > 0">-{{element.discountRate}}%</span>
                   </span>
+                  <span *ngIf="!element.discountAmount" fxLayout="column">-</span>
                 </td>
               </ng-container>
               <ng-container matColumnDef="Subtotal">
@@ -61,8 +71,15 @@
                 <div fxFlex></div>
                 <span class="mat-body-2">{{(order?.totalPrice || 0) / 100}} Br</span>
               </div>
-              <div fxLayout="row">
-                <button mat-stroked-button><mat-icon>more_horiz</mat-icon></button>
+              <div fxLayout="row" fxLayoutGap="12px">
+                <button mat-stroked-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>Leave a comment</button>
+                  <button mat-menu-item>Change table</button>
+                  <button mat-menu-item>Change the order type</button>
+                  <button mat-menu-item (click)="onCancelOrderClick()">Cancel order</button>
+                </mat-menu>
+                <button mat-stroked-button (click)="onSendToKitchenClick()">Send to kitchen</button>
                 <div fxFlex></div>
                 <button mat-raised-button color="primary" style="width: 200px" (click)="onPayClick()">Pay</button>
               </div>
