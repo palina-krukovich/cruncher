@@ -10,8 +10,6 @@ spring:
         instance-connection-name: cruncher-3:us-central1:cruncher
         ip-types: PUBLIC
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://34.68.102.175:5432/cruncher
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
