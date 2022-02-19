@@ -98,6 +98,7 @@ export class SalesComponent implements OnInit {
     this.averageReceiptRate = this.findRate(this.averageReceipt(this.revenue(yesterdayOrders), this.receiptsCount(yesterdayOrders)),
       this.todayAverageReceipt);
     new Set(this.orders.map(order => new Date(order.createdAt).toDateString().substring(4))).forEach(label => this.revenueChartLabels.push(label));
+    this.revenueChartLabels = this.revenueChartLabels.sort();
     this.revenueChartLabels.forEach(label => {
       const dateRevenue = this.orders
         .filter(order => new Date(order.createdAt).toDateString().substring(4) === label)
@@ -128,7 +129,7 @@ export class SalesComponent implements OnInit {
         .reduce((acc, val) => acc + val, 0);
       popularItems.push({itemName, count});
     });
-    popularItems.sort((a, b) => a.count - b.count).slice(0, 7)
+    popularItems.sort((i1, i2) => i1.count - i2.count).reverse().slice(0, 10)
       .forEach(item => {
         this.popularItemsChartData[0].data?.push(item.count);
         this.popularItemsChartLabels.push(item.itemName);

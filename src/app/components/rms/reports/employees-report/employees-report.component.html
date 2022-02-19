@@ -23,7 +23,7 @@
       </ng-container>
       <ng-container matColumnDef="Average Receipt">
         <th mat-header-cell *matHeaderCellDef> Average Receipt </th>
-        <td mat-cell *matCellDef="let employeeReport"> {{employeeReport.averageReceipt}} Br</td>
+        <td mat-cell *matCellDef="let employeeReport"> {{round(employeeReport.averageReceipt * 100) / 100}} Br</td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

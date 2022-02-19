@@ -3,7 +3,7 @@
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-navbar title="Stock" [printEnabled]="true" [exportEnabled]="true"></app-navbar>
+    <app-navbar title="Stock"></app-navbar>
     <table mat-table [dataSource]="stock" class="width-100">
       <ng-container matColumnDef="Picture">
         <th mat-header-cell *matHeaderCellDef></th>
@@ -25,7 +25,10 @@
       </ng-container>
       <ng-container matColumnDef="Stock">
         <th mat-header-cell *matHeaderCellDef> Stock </th>
-        <td mat-cell *matCellDef="let stockItem"> {{stockItem.quantity}} {{stockItem.itemUnit.toLowerCase()}}</td>
+        <td mat-cell *matCellDef="let stockItem">
+          <span *ngIf="round(stockItem.quantity * 100) / 100 >= 0" style="color: green">{{round(stockItem.quantity * 100) / 100}} {{stockItem.itemUnit.toLowerCase()}}</span>
+          <span *ngIf="round(stockItem.quantity * 100) / 100 < 0" style="color: #f44336">{{round(stockItem.quantity * 100) / 100}} {{stockItem.itemUnit.toLowerCase()}}</span>
+        </td>
       </ng-container>
       <ng-container matColumnDef="Cost">
         <th mat-header-cell *matHeaderCellDef> Cost </th>

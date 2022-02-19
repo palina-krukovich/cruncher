@@ -25,8 +25,6 @@ export class SidebarComponent {
         {label: 'Sales', link: '/rms/reports/sales'},
         {label: 'Employees', link: '/rms/reports/employees'},
         {label: 'Tables', link: '/rms/reports/tables'},
-        {label: 'Categories', link: '/rms/reports/categories'},
-        {label: 'Products', link: '/rms/reports/products'},
         {label: 'ABC-analysis', link: '/rms/reports/abc-analysis'},
         {label: 'Payments', link: '/rms/reports/payments'}
       ]

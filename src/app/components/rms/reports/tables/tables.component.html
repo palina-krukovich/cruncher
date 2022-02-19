@@ -15,7 +15,7 @@
         <ng-container matColumnDef="Revenue">
           <th mat-header-cell *matHeaderCellDef> Revenue </th>
           <td mat-cell *matCellDef="let table"> {{table.revenue}} Br </td>
-          <td mat-footer-cell *matFooterCellDef> <b>{{hallReport.revenue}} Br</b> </td>
+          <td mat-footer-cell *matFooterCellDef> <b>{{round(hallReport.revenue * 100) / 100}} Br</b> </td>
         </ng-container>
         <ng-container matColumnDef="Receipts">
           <th mat-header-cell *matHeaderCellDef> Receipts </th>

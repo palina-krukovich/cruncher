@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DishApiService} from '../../../../api/dish-api.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -50,7 +50,8 @@ export class DishesComponent implements OnInit {
 
   constructor(private api: DishApiService,
               private router: Router,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.api.getDishes().then(obs => obs.subscribe(dishes => {
@@ -113,7 +114,9 @@ export class DishesComponent implements OnInit {
   }
 
   private updateDataSource(): void {
-    this.dataSource.data = this.dishes;
+    this.dataSource.data = this.dishes.sort((d1, d2) =>
+      d1.categoryName < d2.categoryName ? -1 : d1.categoryName > d2.categoryName ? 1
+        : d1.name < d2.name ? -1 : d1.name > d2.name ? 1 : 0);
   }
 
 }

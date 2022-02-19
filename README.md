@@ -27,3 +27,7 @@ ng build
 # The app will automatically reload if you change the source files.
 ng serve
 ```
+
+### Presentation
+
+![](img/CRUNCHER.gif)

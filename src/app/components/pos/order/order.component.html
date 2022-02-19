@@ -105,7 +105,7 @@
                 <mat-card (click)="onCategoryClick(category)">
                   <div mat-card-image
                        *ngIf="!!category.photoURL"
-                       style="height: 100px; background-size: cover; background-position: center"
+                       style="height: 100px; background-size: contain; background-position: center; background-repeat: no-repeat"
                        [ngStyle]="{ 'background-image': 'url(' + category.photoURL + ')'}"></div>
                   <div mat-card-image
                        *ngIf="!category.photoURL"
@@ -124,7 +124,7 @@
                 <mat-card (click)="onItemClick(item)">
                   <div mat-card-image
                        *ngIf="!!item.photoURL"
-                       style="height: 100px; background-size: cover; background-position: center"
+                       style="height: 100px; background-size: contain; background-position: center; background-repeat: no-repeat"
                        [ngStyle]="{ 'background-image': 'url(' + item.photoURL + ')'}"></div>
                   <div mat-card-image
                        *ngIf="!item.photoURL"

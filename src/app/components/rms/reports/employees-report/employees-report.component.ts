@@ -58,4 +58,7 @@ export class EmployeesReportComponent implements OnInit {
     this.dataSource.data = this.employeeReports;
   }
 
+  round(n: number): number {
+    return Math.round(n);
+  }
 }

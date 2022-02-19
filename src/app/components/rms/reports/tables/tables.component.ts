@@ -78,4 +78,8 @@ export class TablesComponent implements OnInit {
     });
   }
 
+  round(n: number): number {
+    return Math.round(n);
+  }
+
 }

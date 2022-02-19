@@ -18,4 +18,8 @@ export class StockComponent implements OnInit {
     this.api.getStock().then(obs => obs.subscribe(stock => this.stock = stock));
   }
 
+  round(n: number): number {
+    return Math.round(n);
+  }
+
 }

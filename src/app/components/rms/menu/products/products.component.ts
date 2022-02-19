@@ -99,7 +99,9 @@ export class ProductsComponent implements OnInit {
   }
 
   private updateDataSource(): void {
-    this.dataSource.data = this.products;
+    this.dataSource.data = this.products.sort((d1, d2) =>
+      d1.categoryName < d2.categoryName ? -1 : d1.categoryName > d2.categoryName ? 1
+        : d1.name < d2.name ? -1 : d1.name > d2.name ? 1 : 0);
   }
 
 }

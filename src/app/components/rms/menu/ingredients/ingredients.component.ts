@@ -98,7 +98,8 @@ export class IngredientsComponent implements OnInit {
   }
 
   private updateDataSource(): void {
-    this.dataSource.data = this.ingredients;
+    this.dataSource.data = this.ingredients.sort((d1, d2) =>
+      d1.name < d2.name ? -1 : d1.name > d2.name ? 1 : 0);
   }
 
 }

@@ -82,7 +82,7 @@ public class StockMapper implements BaseMapper<Item, StockDTO> {
         }
         if (item.getType() == ItemType.DISH) {
             Double weight = getTotalWeight(item);
-            Long orderCount = item.getOrderedItems().stream()
+            Long orderCount = item.getOrderedItems() == null ? 0 : item.getOrderedItems().stream()
                 .filter(order -> lastInv == null || order.getOrder().getClosedAt().isAfter(lastInv.getCheckedAt()))
                 .map(OrderedItem::getQuantity)
                 .reduce(0L, Long::sum);

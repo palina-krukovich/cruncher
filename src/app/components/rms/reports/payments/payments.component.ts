@@ -57,6 +57,7 @@ export class PaymentsComponent implements OnInit {
       });
       this.orderReports.push({date: new Date(date), numberOfReceipts, inCash, byCard, total});
     }
+    this.orderReports = this.orderReports.sort((or1, or2) => or1.date < or2.date ? -1 : or1.date > or2.date ? 1 : 0).reverse();
     this.dataSource.data = this.orderReports;
   }
 
