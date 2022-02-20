@@ -2,6 +2,14 @@
 
 **Cruncher** is an *Automated Restaurant Management System*.
 
+### Presentation
+
+![](img/CRUNCHER.gif)
+
+### System overview
+
+![](img/system_components.png)
+
 ### Technology Stack
 
 | Component     | Technology |
@@ -11,6 +19,10 @@
 | **Database**  | PostgreSQL |
 | **GCP**       | <ul><li>App Engine</li><li>Cloud SQL</li></ul>
 | **Firebase**  | <ul><li>Authentication</li><li>Storage</li><li>Firestore</li><li>Hosting</li></ul>
+
+### Database model
+
+![](img/data_model2.png)
 
 ### Build & Run Front-End
 
@@ -27,7 +39,3 @@ ng build
 # The app will automatically reload if you change the source files.
 ng serve
 ```
-
-### Presentation
-
-![](img/CRUNCHER.gif)
