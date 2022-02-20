@@ -39,3 +39,7 @@ ng build
 # The app will automatically reload if you change the source files.
 ng serve
 ```
+
+### License
+
+See the [LICENSE](LICENSE.md) for license rights and limitations (MIT).
